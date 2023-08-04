@@ -4,6 +4,7 @@ import Card from "./card/Card";
 import CardColumns from "./CardColumns";
 import { CardCategory, CardProps } from "./card/card_util";
 import CardForm from "./card/CardForm";
+import { FormState } from "./card/form_reducer";
 
 interface BoardProps {
 	cards: CardProps[];
@@ -13,9 +14,19 @@ function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
 	const [cards, setCards] = useState(props.cards);
 
-	const handleSubmit = (newCardProps: CardProps) => {
-		console.log("new card added", newCardProps);
-		setCards([newCardProps, ...cards]);
+	const handleSubmit = (formState: FormState) => {
+		console.log("new card added", formState);
+		setCards([
+			{
+				category: formState.category,
+				content: formState.content,
+				author: formState.author,
+				name: formState.name,
+				status: formState.status,
+				datePosted: new Date(),
+			},
+			...cards,
+		]);
 	};
 	return (
 		<div className="h-screen w-full flex flex-col   ">

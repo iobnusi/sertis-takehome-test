@@ -17,17 +17,23 @@ function Card(props: CardProps) {
 					</Button>
 				</div>
 
-				<p className="text-lg text-card-body">{props.textContent}</p>
+				<p className="text-lg text-card-body">{props.content}</p>
 				<div className="flex flex-row h-4 gap-2">
 					{/* Likes */}
 					<div className="flex flex-row gap-2 items-center justify-center">
 						<HeartSvg className="h-4 w-4 fill-card-body" />
-						<small className="text-card-body font-bold">78</small>
+						{props.likes ? (
+							<small className="text-card-body font-bold">
+								{props.likes}
+							</small>
+						) : null}
 					</div>
 					<div className=" w-[1px] bg-card-body border-1 shrink-0"></div>
 					{/* Comments */}
 					<div className="flex flex-row gap-1 items-center">
-						<small className="text-card-body font-bold">5</small>
+						<small className="text-card-body font-bold">
+							{props.commentCount ?? 0}
+						</small>
 						<small className="text-card-body">Comments</small>
 					</div>
 				</div>

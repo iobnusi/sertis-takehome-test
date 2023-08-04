@@ -12,8 +12,11 @@ export enum CardCategory {
 
 export interface CardProps {
 	name?: string;
-	textContent: string;
+	content: string;
 	category: CardCategory;
-	status?: string;
-	author?: string;
+	status: string;
+	author: string;
+	likes?: number;
+	commentCount?: number;
+	datePosted: Date;
 }

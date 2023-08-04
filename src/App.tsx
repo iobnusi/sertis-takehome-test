@@ -8,11 +8,14 @@ function App() {
 	const cards: CardProps[] = [
 		{
 			category: CardCategory.biology,
-			textContent:
+			content:
 				"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur, cumque ab veritatis quasi nihil temporibus corrupti veniam autem aperiam, adipisci et repudiandae. Natus deleniti tempora dolore, sit vero voluptate necessitatibus?",
 			author: "Author Name",
 			name: "Card Name",
 			status: "Status",
+			commentCount: 10,
+			datePosted: new Date("1995-12-17T03:24:00"),
+			likes: 58,
 		},
 	];
 	return (
