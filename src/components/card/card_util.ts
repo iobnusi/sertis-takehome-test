@@ -13,7 +13,7 @@ export enum CardCategory {
 export interface CardProps {
 	name?: string;
 	content: string;
-	category: CardCategory;
+	category?: CardCategory;
 	status: string;
 	author: string;
 	likes?: number;

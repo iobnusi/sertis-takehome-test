@@ -15,7 +15,7 @@ function CardForm(props: CardFormProps) {
 
 	const initFormState: FormState = {
 		author: "author",
-		category: CardCategory.biology,
+		category: undefined,
 		content: "",
 		name: "name",
 		status: "status",
@@ -56,7 +56,10 @@ function CardForm(props: CardFormProps) {
 				<Line></Line>
 				<div className="w-full flex justify-end">
 					<Button
-						className="w-20 h-8 rounded-full bg-card-title"
+						className="w-20 h-8 rounded-full bg-card-title disabled:bg-card-body"
+						disabled={
+							formState.content === "" || !formState.category
+						}
 						onClick={() => props.handleSubmit(formState)}
 					>
 						<p className="text-white font-bold text-sm">Post</p>

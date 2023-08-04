@@ -9,8 +9,8 @@ interface CardColumnsProps {
 
 function CardColumns(props: CardColumnsProps) {
 	return (
-		<div className="h-full w-full flex flex-row gap-4">
-			<div className="w-1/2 h-fit  flex flex-col gap-4 shrink-0">
+		<div className="h-full w-full flex flex-row gap-4 ">
+			<div className="w-[calc(50%-8px)] h-fit  flex flex-col gap-4 shrink-0">
 				{props.cardsData.map((cardData, i) => {
 					if (i % 2 === 0)
 						return (
@@ -28,7 +28,7 @@ function CardColumns(props: CardColumnsProps) {
 					else return <></>;
 				})}
 			</div>
-			<div className="w-1/2 h-fit flex flex-col gap-4 shrink-0">
+			<div className="w-[calc(50%-8px)] h-fit flex flex-col gap-4 shrink-0">
 				{props.cardsData.map((cardData, i) => {
 					if (i % 2 === 1)
 						return (

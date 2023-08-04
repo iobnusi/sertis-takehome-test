@@ -17,7 +17,7 @@ export interface FormState {
 	name: string;
 	status: string;
 	content: string;
-	category: CardCategory;
+	category: CardCategory | undefined;
 	author: string;
 }
 

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
 import CircleSvg from "../svgs/CircleSvg";
 import { CardCategory, CardProps } from "./card_util";
 
 function Card(props: CardProps) {
+	const [isLiked, setIsLiked] = useState(false);
+
 	return (
 		<div className="bg-white p-5 flex flex-col gap-8 w-full h-fit">
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-row justify-between">
 					<p className="font-bold text-xs text-card-title">
-						{props.category.toUpperCase()}
+						{props.category ? props.category.toUpperCase() : null}
 					</p>
 					<Button className="">
 						<CircleSvg className="h-4 w-4 fill-card-title"></CircleSvg>
@@ -21,10 +23,20 @@ function Card(props: CardProps) {
 				<div className="flex flex-row h-4 gap-2">
 					{/* Likes */}
 					<div className="flex flex-row gap-2 items-center justify-center">
-						<HeartSvg className="h-4 w-4 fill-card-body" />
+						<Button onClick={() => setIsLiked(!isLiked)}>
+							<HeartSvg
+								className={`h-4 w-4 ${
+									isLiked ? "fill-like-red" : "fill-card-body"
+								}`}
+							/>
+						</Button>
 						{props.likes ? (
 							<small className="text-card-body font-bold">
-								{props.likes}
+								{props.likes + (isLiked ? 1 : 0)}
+							</small>
+						) : isLiked ? (
+							<small className="text-card-body font-bold">
+								1
 							</small>
 						) : null}
 					</div>

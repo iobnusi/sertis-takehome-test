@@ -19,7 +19,7 @@ function App() {
 		},
 	];
 	return (
-		<div className="center h-screen w-[840px] bg-board absolute left- flex flex-row">
+		<div className="scrollbar1 center h-screen w-[840px] bg-board absolute left-0 flex flex-row">
 			<SideNavbar></SideNavbar>
 			<Board cards={cards}></Board>
 		</div>

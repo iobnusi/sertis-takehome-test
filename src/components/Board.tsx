@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Button from "./basic/Button";
-import Card from "./card/Card";
 import CardColumns from "./CardColumns";
-import { CardCategory, CardProps } from "./card/card_util";
+import { CardProps } from "./card/card_util";
 import CardForm from "./card/CardForm";
 import { FormState } from "./card/form_reducer";
 
 interface BoardProps {
 	cards: CardProps[];
+	className?: string;
 }
 
 function Board(props: BoardProps) {
@@ -30,7 +30,9 @@ function Board(props: BoardProps) {
 	};
 	return (
 		<div className="h-screen w-full flex flex-col   ">
-			<header className="h-[90px] bg-white shrink-0 flex flex-row px-4">
+			<header
+				className={`${props.className} h-[90px] bg-white flex flex-row px-4`}
+			>
 				{navButtons.map((name) => {
 					return (
 						<Button className="w-[150px] font-thin text-3xl text-card-body ">
@@ -39,7 +41,7 @@ function Board(props: BoardProps) {
 					);
 				})}
 			</header>
-			<div className="grow p-4 overflow-auto flex flex-col gap-4 ">
+			<div className="  p-4 overflow-auto flex flex-col gap-4  ">
 				<CardForm handleSubmit={handleSubmit}></CardForm>
 				<CardColumns cardsData={cards}></CardColumns>
 			</div>
