@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
 import CircleSvg from "../svgs/CircleSvg";
-import { CardProps } from "./card_util";
+import { CardProps, getTimeElapsedFromDatePosted } from "./card_util";
 import EditSvg from "../svgs/EditSvg";
 
 function Card(props: CardProps) {
@@ -69,7 +69,7 @@ function Card(props: CardProps) {
 						{props.data.author.name}
 					</small>
 					<small className="text-card-body text-[10px]">
-						2 hours ago
+						{getTimeElapsedFromDatePosted(props.data.datePosted)}
 					</small>
 				</div>
 			</div>
