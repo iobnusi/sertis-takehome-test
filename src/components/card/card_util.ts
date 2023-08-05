@@ -1,3 +1,5 @@
+import { User } from "../utils/user_util";
+
 export enum CardCategory {
 	physics = "Physics",
 	biology = "Biology",
@@ -11,9 +13,17 @@ export enum CardCategory {
 }
 
 export interface CardProps {
+	data: CardData;
+	isEditable: boolean;
+}
+
+export interface CardData {
 	name?: string;
-	textContent: string;
-	category: CardCategory;
-	status?: string;
-	author?: string;
+	content: string;
+	category?: CardCategory;
+	status: string;
+	author: User;
+	likes?: number;
+	commentCount?: number;
+	datePosted: Date;
 }

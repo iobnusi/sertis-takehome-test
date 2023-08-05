@@ -1,25 +1,42 @@
 import React, { useState } from "react";
 import Button from "./basic/Button";
-import Card from "./card/Card";
 import CardColumns from "./CardColumns";
-import { CardCategory, CardProps } from "./card/card_util";
+import { CardData } from "./card/card_util";
 import CardForm from "./card/CardForm";
+import { FormState } from "./card/form_reducer";
+import { User } from "./utils/user_util";
 
 interface BoardProps {
-	cards: CardProps[];
+	cardsData: CardData[];
+	user: User;
+	className?: string;
 }
 
 function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
-	const [cards, setCards] = useState(props.cards);
+	const [cardsData, setCardsData] = useState(props.cardsData);
 
-	const handleSubmit = (newCardProps: CardProps) => {
-		console.log("new card added", newCardProps);
-		setCards([newCardProps, ...cards]);
+	const handleSubmit = (formState: FormState, author: User) => {
+		console.log("new card added", formState);
+		setCardsData([
+			{
+				category: formState.category,
+				content: formState.content,
+				name: formState.name,
+				status: formState.status,
+				datePosted: new Date(),
+				commentCount: 0,
+				likes: 0,
+				author: author,
+			},
+			...cardsData,
+		]);
 	};
 	return (
-		<div className="h-screen w-full flex flex-col   ">
-			<header className="h-[90px] bg-white shrink-0 flex flex-row px-4">
+		<div className="h-screen w-full flex flex-col">
+			<header
+				className={`${props.className} h-[90px] bg-white flex flex-row px-4`}
+			>
 				{navButtons.map((name) => {
 					return (
 						<Button className="w-[150px] font-thin text-3xl text-card-body ">
@@ -28,9 +45,15 @@ function Board(props: BoardProps) {
 					);
 				})}
 			</header>
-			<div className="grow p-4 overflow-auto flex flex-col gap-4 ">
-				<CardForm handleSubmit={handleSubmit}></CardForm>
-				<CardColumns cardsData={cards}></CardColumns>
+			<div className="  p-4 overflow-auto flex flex-col gap-4  ">
+				<CardForm
+					currentUser={props.user}
+					handleSubmit={handleSubmit}
+				></CardForm>
+				<CardColumns
+					currentUser={props.user}
+					cardsData={cardsData}
+				></CardColumns>
 			</div>
 		</div>
 	);
