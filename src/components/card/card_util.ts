@@ -12,6 +12,13 @@ export enum CardCategory {
 	art = "Art",
 }
 
+export enum CardStatus {
+	hot_take = "Hot Take",
+	true_fact = "True Fact",
+	interesting = "Interesting",
+	question = "Question",
+}
+
 export interface CardProps {
 	data: CardData;
 	isEditable: boolean;
@@ -21,7 +28,7 @@ export interface CardData {
 	name?: string;
 	content: string;
 	category?: CardCategory;
-	status: string;
+	status?: CardStatus;
 	author: User;
 	likes?: number;
 	commentCount?: number;

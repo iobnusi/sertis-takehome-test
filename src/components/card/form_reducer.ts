@@ -1,5 +1,5 @@
 import { User } from "../utils/user_util";
-import { CardCategory } from "./card_util";
+import { CardCategory, CardStatus } from "./card_util";
 
 export enum FormActionType {
 	name_update,
@@ -16,7 +16,7 @@ interface FormAction {
 
 export interface FormState {
 	name: string;
-	status: string;
+	status: CardStatus | undefined;
 	content: string;
 	category: CardCategory | undefined;
 }
@@ -25,7 +25,7 @@ export const initFormState: FormState = {
 	category: undefined,
 	content: "",
 	name: "name",
-	status: "status",
+	status: undefined,
 };
 
 const formReducer = (state: FormState, action: FormAction) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Button from "./basic/Button";
-import ChevronDownSvg from "./svgs/ChevronDownSvg";
-import { CardCategory } from "./card/card_util";
+import Button from "../basic/Button";
+import ChevronDownSvg from "../svgs/ChevronDownSvg";
+import { CardCategory } from "../card/card_util";
 
 interface CategoryDropdownProps {
 	className?: string;
@@ -32,7 +32,7 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 	});
 
 	return (
-		<div className="w-full relative" ref={dropdown}>
+		<div className="w-fit relative" ref={dropdown}>
 			<Button
 				className="bg-card-title px-3 rounded-full flex flex-row gap-1 items-center"
 				onClick={() => {

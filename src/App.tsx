@@ -2,7 +2,12 @@ import React from "react";
 import SideNavbar from "./components/SideNavbar";
 import Board from "./components/Board";
 import "./App.css";
-import { CardCategory, CardData, CardProps } from "./components/card/card_util";
+import {
+	CardCategory,
+	CardData,
+	CardProps,
+	CardStatus,
+} from "./components/card/card_util";
 import { User } from "./components/utils/user_util";
 
 function App() {
@@ -20,7 +25,7 @@ function App() {
 				name: "Tereza Konecna",
 			},
 			name: "Card Name",
-			status: "Status",
+			status: CardStatus.interesting,
 			commentCount: 10,
 			datePosted: new Date("1995-12-17T03:24:00"),
 			likes: 58,

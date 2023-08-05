@@ -4,6 +4,7 @@ import Button from "../basic/Button";
 import CircleSvg from "../svgs/CircleSvg";
 import { CardProps, getTimeElapsedFromDatePosted } from "./card_util";
 import EditSvg from "../svgs/EditSvg";
+import StatusIcon from "../basic/StatusIcon";
 
 function Card(props: CardProps) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -24,9 +25,10 @@ function Card(props: CardProps) {
 							</Button>
 						) : null}
 
-						<Button className="">
-							<CircleSvg className="h-4 w-4 fill-card-title"></CircleSvg>
-						</Button>
+						<StatusIcon
+							className="h-4 w-4"
+							status={props.data.status}
+						></StatusIcon>
 					</div>
 				</div>
 

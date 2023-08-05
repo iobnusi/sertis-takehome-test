@@ -35,7 +35,7 @@ function Board(props: BoardProps) {
 	return (
 		<div className="h-screen w-full flex flex-col">
 			<header
-				className={`${props.className} h-[90px] bg-white flex flex-row px-4`}
+				className={`${props.className} h-[90px] shrink-0 bg-white flex flex-row px-4`}
 			>
 				{navButtons.map((name) => {
 					return (
