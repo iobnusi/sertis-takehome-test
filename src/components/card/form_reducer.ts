@@ -6,6 +6,7 @@ export enum FormActionType {
 	status_update,
 	content_update,
 	category_update,
+	reset,
 }
 
 interface FormAction {
@@ -19,6 +20,13 @@ export interface FormState {
 	content: string;
 	category: CardCategory | undefined;
 }
+
+export const initFormState: FormState = {
+	category: undefined,
+	content: "",
+	name: "name",
+	status: "status",
+};
 
 const formReducer = (state: FormState, action: FormAction) => {
 	switch (action.type) {
@@ -42,6 +50,8 @@ const formReducer = (state: FormState, action: FormAction) => {
 				...state,
 				category: action.payload,
 			};
+		case FormActionType.reset:
+			return initFormState;
 		default:
 			return state;
 	}

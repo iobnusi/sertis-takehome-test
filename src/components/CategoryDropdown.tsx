@@ -5,12 +5,12 @@ import { CardCategory } from "./card/card_util";
 
 interface CategoryDropdownProps {
 	className?: string;
+	category: CardCategory | undefined;
 	onSelectCategory: (category: CardCategory) => void;
 }
 
 function CategoryDropdown(props: CategoryDropdownProps) {
 	const [open, setOpen] = useState(false);
-	const [category, setCategory] = useState("");
 
 	const dropdown = useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,7 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 				}}
 			>
 				<small className="text-white font-bold">
-					{category ? category : "Select Category"}
+					{props.category ? props.category : "Select Category"}
 				</small>
 				<ChevronDownSvg className="h-4 w-4 text-white"></ChevronDownSvg>
 			</Button>
@@ -56,7 +56,6 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 								className="h-12 shrink-0 px-4 py-1 hover:bg-card-body"
 								onClick={() => {
 									setOpen(false);
-									setCategory(CardCategory[key]);
 									props.onSelectCategory(CardCategory[key]);
 								}}
 							>
