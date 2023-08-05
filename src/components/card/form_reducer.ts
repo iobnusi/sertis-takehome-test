@@ -1,3 +1,4 @@
+import { User } from "../utils/user_util";
 import { CardCategory } from "./card_util";
 
 export enum FormActionType {
@@ -5,7 +6,6 @@ export enum FormActionType {
 	status_update,
 	content_update,
 	category_update,
-	author_update,
 }
 
 interface FormAction {
@@ -18,7 +18,6 @@ export interface FormState {
 	status: string;
 	content: string;
 	category: CardCategory | undefined;
-	author: string;
 }
 
 const formReducer = (state: FormState, action: FormAction) => {
@@ -42,11 +41,6 @@ const formReducer = (state: FormState, action: FormAction) => {
 			return {
 				...state,
 				category: action.payload,
-			};
-		case FormActionType.author_update:
-			return {
-				...state,
-				author: action.payload,
 			};
 		default:
 			return state;

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
 import CircleSvg from "../svgs/CircleSvg";
-import { CardCategory, CardProps } from "./card_util";
+import { CardProps } from "./card_util";
+import EditSvg from "../svgs/EditSvg";
 
 function Card(props: CardProps) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -12,14 +13,24 @@ function Card(props: CardProps) {
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-row justify-between">
 					<p className="font-bold text-xs text-card-title">
-						{props.category ? props.category.toUpperCase() : null}
+						{props.data.category
+							? props.data.category.toUpperCase()
+							: null}
 					</p>
-					<Button className="">
-						<CircleSvg className="h-4 w-4 fill-card-title"></CircleSvg>
-					</Button>
+					<div className="flex flex-row gap-2">
+						{props.isEditable ? (
+							<Button className="">
+								<EditSvg className="h-4 w-4 fill-card-title"></EditSvg>
+							</Button>
+						) : null}
+
+						<Button className="">
+							<CircleSvg className="h-4 w-4 fill-card-title"></CircleSvg>
+						</Button>
+					</div>
 				</div>
 
-				<p className="text-lg text-card-body">{props.content}</p>
+				<p className="text-lg text-card-body">{props.data.content}</p>
 				<div className="flex flex-row h-4 gap-2">
 					{/* Likes */}
 					<div className="flex flex-row gap-2 items-center justify-center">
@@ -30,9 +41,9 @@ function Card(props: CardProps) {
 								}`}
 							/>
 						</Button>
-						{props.likes ? (
+						{props.data.likes ? (
 							<small className="text-card-body font-bold">
-								{props.likes + (isLiked ? 1 : 0)}
+								{props.data.likes + (isLiked ? 1 : 0)}
 							</small>
 						) : isLiked ? (
 							<small className="text-card-body font-bold">
@@ -44,7 +55,7 @@ function Card(props: CardProps) {
 					{/* Comments */}
 					<div className="flex flex-row gap-1 items-center">
 						<small className="text-card-body font-bold">
-							{props.commentCount ?? 0}
+							{props.data.commentCount ?? 0}
 						</small>
 						<small className="text-card-body">Comments</small>
 					</div>
@@ -55,7 +66,7 @@ function Card(props: CardProps) {
 				<div className="w-7 h-7 rounded-full bg-card-body shrink-0"></div>
 				<div className="flex flex-col">
 					<small className="text-card-title text-xs font-bold">
-						Tereza Konecna
+						{props.data.author.name}
 					</small>
 					<small className="text-card-body text-[10px]">
 						2 hours ago

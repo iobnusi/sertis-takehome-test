@@ -1,35 +1,39 @@
 import React, { useState } from "react";
 import Button from "./basic/Button";
 import CardColumns from "./CardColumns";
-import { CardProps } from "./card/card_util";
+import { CardData } from "./card/card_util";
 import CardForm from "./card/CardForm";
 import { FormState } from "./card/form_reducer";
+import { User } from "./utils/user_util";
 
 interface BoardProps {
-	cards: CardProps[];
+	cardsData: CardData[];
+	user: User;
 	className?: string;
 }
 
 function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
-	const [cards, setCards] = useState(props.cards);
+	const [cardsData, setCardsData] = useState(props.cardsData);
 
-	const handleSubmit = (formState: FormState) => {
+	const handleSubmit = (formState: FormState, author: User) => {
 		console.log("new card added", formState);
-		setCards([
+		setCardsData([
 			{
 				category: formState.category,
 				content: formState.content,
-				author: formState.author,
 				name: formState.name,
 				status: formState.status,
 				datePosted: new Date(),
+				commentCount: 0,
+				likes: 0,
+				author: author,
 			},
-			...cards,
+			...cardsData,
 		]);
 	};
 	return (
-		<div className="h-screen w-full flex flex-col   ">
+		<div className="h-screen w-full flex flex-col">
 			<header
 				className={`${props.className} h-[90px] bg-white flex flex-row px-4`}
 			>
@@ -42,8 +46,14 @@ function Board(props: BoardProps) {
 				})}
 			</header>
 			<div className="  p-4 overflow-auto flex flex-col gap-4  ">
-				<CardForm handleSubmit={handleSubmit}></CardForm>
-				<CardColumns cardsData={cards}></CardColumns>
+				<CardForm
+					currentUser={props.user}
+					handleSubmit={handleSubmit}
+				></CardForm>
+				<CardColumns
+					currentUser={props.user}
+					cardsData={cardsData}
+				></CardColumns>
 			</div>
 		</div>
 	);

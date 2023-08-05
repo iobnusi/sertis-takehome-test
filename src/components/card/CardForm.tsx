@@ -5,16 +5,17 @@ import Button from "../basic/Button";
 import { CardCategory } from "./card_util";
 import CategoryDropdown from "../CategoryDropdown";
 import formReducer, { FormActionType, FormState } from "./form_reducer";
+import { User } from "../utils/user_util";
 
 interface CardFormProps {
 	className?: string;
-	handleSubmit: (formState: FormState) => void;
+	currentUser: User;
+	handleSubmit: (formState: FormState, author: User) => void;
 }
 function CardForm(props: CardFormProps) {
 	// on click post should call an event and pass event to board where the mock data array will be appended with the newly created card from the form
 
 	const initFormState: FormState = {
-		author: "author",
 		category: undefined,
 		content: "",
 		name: "name",
@@ -60,7 +61,9 @@ function CardForm(props: CardFormProps) {
 						disabled={
 							formState.content === "" || !formState.category
 						}
-						onClick={() => props.handleSubmit(formState)}
+						onClick={() =>
+							props.handleSubmit(formState, props.currentUser)
+						}
 					>
 						<p className="text-white font-bold text-sm">Post</p>
 					</Button>

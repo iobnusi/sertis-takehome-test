@@ -2,15 +2,23 @@ import React from "react";
 import SideNavbar from "./components/SideNavbar";
 import Board from "./components/Board";
 import "./App.css";
-import { CardCategory, CardProps } from "./components/card/card_util";
+import { CardCategory, CardData, CardProps } from "./components/card/card_util";
+import { User } from "./components/utils/user_util";
 
 function App() {
-	const cards: CardProps[] = [
+	const currentUser: User = {
+		id: "91c5f082-32a4-11ee-be56-0242ac120002",
+		name: "Eisen Lance De Guzman",
+	};
+	const mockCardsData: CardData[] = [
 		{
 			category: CardCategory.biology,
 			content:
 				"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur, cumque ab veritatis quasi nihil temporibus corrupti veniam autem aperiam, adipisci et repudiandae. Natus deleniti tempora dolore, sit vero voluptate necessitatibus?",
-			author: "Author Name",
+			author: {
+				id: "b1f37fea-32a5-11ee-be56-0242ac120002",
+				name: "Tereza Konecna",
+			},
 			name: "Card Name",
 			status: "Status",
 			commentCount: 10,
@@ -20,8 +28,8 @@ function App() {
 	];
 	return (
 		<div className="scrollbar1 center h-screen w-[840px] bg-board absolute left-0 flex flex-row">
-			<SideNavbar></SideNavbar>
-			<Board cards={cards}></Board>
+			<SideNavbar user={currentUser}></SideNavbar>
+			<Board user={currentUser} cardsData={mockCardsData}></Board>
 		</div>
 	);
 }

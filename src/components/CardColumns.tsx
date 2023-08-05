@@ -1,10 +1,11 @@
 import React from "react";
-import Button from "./basic/Button";
 import Card from "./card/Card";
-import { CardProps } from "./card/card_util";
+import { CardData } from "./card/card_util";
+import { User } from "./utils/user_util";
 
 interface CardColumnsProps {
-	cardsData: CardProps[];
+	cardsData: CardData[];
+	currentUser: User;
 }
 
 function CardColumns(props: CardColumnsProps) {
@@ -15,14 +16,10 @@ function CardColumns(props: CardColumnsProps) {
 					if (i % 2 === 0)
 						return (
 							<Card
-								name={cardData.name}
-								content={cardData.content}
-								category={cardData.category}
-								status={cardData.status}
-								author={cardData.author}
-								datePosted={cardData.datePosted}
-								commentCount={cardData.commentCount}
-								likes={cardData.likes}
+								data={cardData}
+								isEditable={
+									props.currentUser.id === cardData.author.id
+								}
 							></Card>
 						);
 					else return <></>;
@@ -33,14 +30,10 @@ function CardColumns(props: CardColumnsProps) {
 					if (i % 2 === 1)
 						return (
 							<Card
-								name={cardData.name}
-								content={cardData.content}
-								category={cardData.category}
-								status={cardData.status}
-								author={cardData.author}
-								datePosted={cardData.datePosted}
-								commentCount={cardData.commentCount}
-								likes={cardData.likes}
+								data={cardData}
+								isEditable={
+									props.currentUser.id === cardData.author.id
+								}
 							></Card>
 						);
 					else return <></>;
