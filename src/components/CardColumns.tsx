@@ -2,10 +2,12 @@ import React from "react";
 import Card from "./card/Card";
 import { CardData } from "./card/card_util";
 import { User } from "./utils/user_util";
+import { FormState } from "./card/form_reducer";
 
 interface CardColumnsProps {
 	cardsData: CardData[];
 	currentUser: User;
+	editCallback: (cardFormState: FormState) => void;
 }
 
 function CardColumns(props: CardColumnsProps) {
@@ -20,6 +22,7 @@ function CardColumns(props: CardColumnsProps) {
 								isEditable={
 									props.currentUser.id === cardData.author.id
 								}
+								editCallback={props.editCallback}
 							></Card>
 						);
 					else return <></>;
@@ -34,6 +37,7 @@ function CardColumns(props: CardColumnsProps) {
 								isEditable={
 									props.currentUser.id === cardData.author.id
 								}
+								editCallback={props.editCallback}
 							></Card>
 						);
 					else return <></>;

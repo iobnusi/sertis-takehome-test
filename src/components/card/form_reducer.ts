@@ -15,13 +15,15 @@ interface FormAction {
 }
 
 export interface FormState {
+	id: string | undefined;
 	name: string;
 	status: CardStatus | undefined;
 	content: string;
 	category: CardCategory | undefined;
 }
 
-export const initFormState: FormState = {
+export const emptyFormState: FormState = {
+	id: undefined,
 	category: undefined,
 	content: "",
 	name: "name",
@@ -51,7 +53,7 @@ const formReducer = (state: FormState, action: FormAction) => {
 				category: action.payload,
 			};
 		case FormActionType.reset:
-			return initFormState;
+			return emptyFormState;
 		default:
 			return state;
 	}

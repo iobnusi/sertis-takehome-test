@@ -1,4 +1,5 @@
 import { User } from "../utils/user_util";
+import { FormState } from "./form_reducer";
 
 export enum CardCategory {
 	physics = "Physics",
@@ -22,9 +23,11 @@ export enum CardStatus {
 export interface CardProps {
 	data: CardData;
 	isEditable: boolean;
+	editCallback: (cardFormState: FormState) => void;
 }
 
 export interface CardData {
+	id: string;
 	name?: string;
 	content: string;
 	category?: CardCategory;
@@ -58,4 +61,15 @@ export function getTimeElapsedFromDatePosted(date: Date): string {
 			Math.round(elapsedTimeInMins / 60 / 24 / 365) === 1 ? "" : "s"
 		} ago`;
 	return res;
+}
+
+export function parseCardDataToFormState(data: CardData): FormState {
+	let formState: FormState = {
+		id: data.id,
+		category: data.category,
+		content: data.content,
+		name: data.name ?? "",
+		status: data.status,
+	};
+	return formState;
 }

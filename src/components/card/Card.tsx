@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
-import CircleSvg from "../svgs/CircleSvg";
-import { CardProps, getTimeElapsedFromDatePosted } from "./card_util";
+import {
+	CardProps,
+	getTimeElapsedFromDatePosted,
+	parseCardDataToFormState,
+} from "./card_util";
 import EditSvg from "../svgs/EditSvg";
 import StatusIcon from "../basic/StatusIcon";
 
@@ -20,7 +23,14 @@ function Card(props: CardProps) {
 					</p>
 					<div className="flex flex-row gap-2">
 						{props.isEditable ? (
-							<Button className="">
+							<Button
+								className=""
+								onClick={() => {
+									props.editCallback(
+										parseCardDataToFormState(props.data)
+									);
+								}}
+							>
 								<EditSvg className="h-4 w-4 fill-card-title"></EditSvg>
 							</Button>
 						) : null}
