@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../basic/Button";
 import { CardStatus } from "../card/card_util";
-import CircleSvg from "../svgs/CircleSvg";
 import StatusIcon from "../basic/StatusIcon";
 
 interface StatusDropdownProps {

@@ -34,7 +34,6 @@ function Card(props: CardProps) {
 								<EditSvg className="h-4 w-4 fill-card-title"></EditSvg>
 							</Button>
 						) : null}
-
 						<StatusIcon
 							className="h-4 w-4"
 							status={props.data.status}

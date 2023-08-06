@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../basic/Button";
 import ChevronDownSvg from "../svgs/ChevronDownSvg";
 import { CardCategory } from "../card/card_util";
@@ -50,7 +50,7 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 						Object.keys(
 							CardCategory
 						) as (keyof typeof CardCategory)[]
-					).map((key, index) => {
+					).map((key) => {
 						return (
 							<Button
 								className="h-12 shrink-0 px-4 py-1 hover:bg-card-body"

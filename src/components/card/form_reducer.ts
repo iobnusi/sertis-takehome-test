@@ -1,4 +1,3 @@
-import { User } from "../utils/user_util";
 import { CardCategory, CardStatus } from "./card_util";
 
 export enum FormActionType {

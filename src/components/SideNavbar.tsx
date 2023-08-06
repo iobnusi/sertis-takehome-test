@@ -1,4 +1,3 @@
-import React from "react";
 import { CardCategory } from "./card/card_util";
 import CategoryTab from "./CategoryTab";
 import GraphSvg from "./svgs/GraphSvg";

@@ -1,4 +1,3 @@
-import React from "react";
 import Modal from "./Modal";
 import CardForm from "../card/CardForm";
 import { FormState } from "../card/form_reducer";

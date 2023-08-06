@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import CircleSvg from "../svgs/CircleSvg";
 import { CardStatus } from "../card/card_util";
 

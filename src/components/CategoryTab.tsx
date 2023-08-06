@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { CardCategory } from "./card/card_util";
 
 interface CategoryTabProps {

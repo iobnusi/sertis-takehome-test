@@ -1,4 +1,3 @@
-import React from "react";
 import { SvgProps } from "./svg_util";
 
 function HeartSvg(props: SvgProps) {

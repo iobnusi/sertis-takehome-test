@@ -19,8 +19,6 @@ interface CardFormProps {
 	handleSubmit: (formState: FormState) => void;
 }
 function CardForm(props: CardFormProps) {
-	// on click post should call an event and pass event to board where the mock data array will be appended with the newly created card from the form
-
 	const [formState, dispatch] = useReducer(
 		formReducer,
 		props.initFormState ?? emptyFormState

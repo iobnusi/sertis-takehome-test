@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "./card/Card";
 import { CardData } from "./card/card_util";
 import { User } from "./utils/user_util";

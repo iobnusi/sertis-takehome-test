@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "./basic/Button";
 import CardColumns from "./CardColumns";
 import { CardData } from "./card/card_util";
