@@ -9,6 +9,7 @@ import {
 import StatusIcon from "../basic/StatusIcon";
 import EditOptionsDropdown from "../dropdown/EditOptionsDropdown";
 import { EditAction } from "../dropdown/edit_options_util";
+import ProfileIcon from "../basic/ProfileIcon";
 
 function Card(props: CardProps) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -16,7 +17,7 @@ function Card(props: CardProps) {
 	return (
 		<div
 			key={props.key}
-			className="bg-white p-5 flex flex-col gap-8 w-full h-fit"
+			className="slide-bottom bg-white p-5 flex flex-col gap-8 w-full h-fit"
 		>
 			<div className="flex flex-col gap-2">
 				<div className="h-6 flex flex-row justify-between items-center">
@@ -77,7 +78,7 @@ function Card(props: CardProps) {
 			</div>
 			<div className="h-10 flex flex-row items-center p-2 gap-2">
 				{/* Author Info */}
-				<div className="w-7 h-7 rounded-full bg-card-body shrink-0"></div>
+				<ProfileIcon name={props.data.author.name}></ProfileIcon>
 				<div className="flex flex-col">
 					<small className="text-card-title text-xs font-bold">
 						{props.data.author.name}

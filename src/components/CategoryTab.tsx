@@ -8,7 +8,7 @@ interface CategoryTabProps {
 	users: number;
 	icon: Element | JSX.Element;
 	onSelect: (category: CardCategory) => void;
-	onDeselect: (category: CardCategory) => void;
+	onDeselect: () => void;
 }
 
 function CategoryTab(props: CategoryTabProps) {
@@ -23,7 +23,7 @@ function CategoryTab(props: CategoryTabProps) {
 				}  border-b-[1px] border-side-nav-secondary hover:!bg-side-nav-icon`}
 				onClick={() => {
 					props.isSelected
-						? props.onDeselect(props.category)
+						? props.onDeselect()
 						: props.onSelect(props.category);
 				}}
 			>
@@ -35,7 +35,7 @@ function CategoryTab(props: CategoryTabProps) {
 						{props.category}
 					</p>
 					<p className="text-side-nav-secondary text-xs text-start font-semibold">
-						{props.users} Users
+						{`${props.users} User${props.users === 1 ? "" : "s"}`}
 					</p>
 				</div>
 			</Button>

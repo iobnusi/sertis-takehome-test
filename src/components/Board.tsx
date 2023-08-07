@@ -6,7 +6,6 @@ import CardForm from "./card/CardForm";
 import { FormState, emptyFormState } from "./card/form_reducer";
 import { User } from "./utils/user_util";
 import CardEditModal from "./modal/CardEditModal";
-import { v4 as uuidv4 } from "uuid";
 import CardDeleteModal from "./modal/CardDeleteModal";
 
 interface BoardProps {
@@ -14,58 +13,28 @@ interface BoardProps {
 	user: User;
 	className?: string;
 	filterCategory: CardCategory | null;
+	createCard: (formState: FormState) => void;
+	editCard: (formState: FormState) => void;
+	deleteCard: (cardId: string) => void;
 }
 
 function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
 	const [editFormState, setEditFormState] = useState(emptyFormState);
-	const [cardsData, setCardsData] = useState(props.cardsData);
 	const [isEditModalOpen, setEditModalOpen] = useState(false);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
 	const handleCreate = (formState: FormState) => {
-		setCardsData([
-			{
-				category: formState.category,
-				content: formState.content,
-				name: formState.name,
-				status: formState.status,
-				datePosted: new Date(),
-				commentCount: 0,
-				likes: 0,
-				author: props.user, // user is independent from the formState and is based on Board props
-				id: uuidv4(), // create a unique id
-			},
-			...cardsData,
-		]);
+		props.createCard(formState);
 	};
 
 	const handleUpdate = (formState: FormState) => {
-		// find index of the card in the cardsData array and update its info form the given formstate
-		setCardsData(
-			cardsData.map((card) => {
-				if (card.id === formState.id) {
-					return {
-						category: formState.category,
-						content: formState.content,
-						name: formState.name,
-						status: formState.status,
-						datePosted: new Date(),
-						commentCount: card.commentCount,
-						likes: card.likes,
-						author: card.author,
-						id: card.id,
-					};
-				} else return card;
-			})
-		);
+		props.editCard(formState);
 		setEditModalOpen(false);
 	};
 
 	const handleDelete = (cardId: string) => {
-		setCardsData((prevCardsData) =>
-			prevCardsData.filter((card) => card.id !== cardId)
-		);
+		props.deleteCard(cardId);
 		setDeleteModalOpen(false);
 	};
 
@@ -109,6 +78,7 @@ function Board(props: BoardProps) {
 			<div className="p-4 overflow-auto flex flex-col gap-4">
 				<CardForm
 					className="p-5"
+					author={props.user}
 					handleSubmit={handleCreate}
 					textAreaRows={1}
 					submitButtonCondition={(formState) => {
@@ -118,13 +88,14 @@ function Board(props: BoardProps) {
 				<CardColumns
 					key="card-columns"
 					currentUser={props.user}
-					cardsData={cardsData}
+					cardsData={props.cardsData}
 					filterCategory={props.filterCategory}
 					editCallback={openCardEditModal}
 					deleteCallback={openCardDeleteModal}
 				></CardColumns>
 				<CardEditModal
 					isOpen={isEditModalOpen}
+					author={props.user}
 					formState={editFormState}
 					handleClose={() => setEditModalOpen(false)}
 					handleUpdate={handleUpdate}

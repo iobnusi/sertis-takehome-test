@@ -10,9 +10,12 @@ import formReducer, {
 	emptyFormState,
 } from "./form_reducer";
 import StatusDropdown from "../dropdown/StatusDropdown";
+import ProfileIcon from "../basic/ProfileIcon";
+import { User } from "../utils/user_util";
 
 interface CardFormProps {
 	className?: string;
+	author: User;
 	textAreaRows: number;
 	initFormState?: FormState;
 	submitButtonCondition: (formState: FormState) => boolean;
@@ -27,7 +30,7 @@ function CardForm(props: CardFormProps) {
 		<div
 			className={` ${props.className} w-full h-fit bg-white flex flex-row gap-2`}
 		>
-			<div className="w-10 h-10 rounded-full bg-card-body shrink-0"></div>
+			<ProfileIcon name={props.author.name}></ProfileIcon>
 			<div className="w-full flex flex-col gap-4 items-start">
 				<div className="w-full flex flex-row justify-between">
 					<CategoryDropdown

@@ -1,4 +1,4 @@
-import { CardCategory } from "./card/card_util";
+import { CardCategory, CardData } from "./card/card_util";
 import CategoryTab from "./CategoryTab";
 import GraphSvg from "./svgs/GraphSvg";
 import { User } from "./utils/user_util";
@@ -11,15 +11,18 @@ import SocialStudiesSvg from "./svgs/SocialStudiesSvg";
 import SpaceSvg from "./svgs/SpaceSvg";
 import ArtSvg from "./svgs/ArtSvg";
 import { useState } from "react";
+import ProfileIcon from "./basic/ProfileIcon";
 
 interface SideNavbarProps {
 	user: User;
+	cardsData: CardData[];
 	onSelectFilterCategory: (category: CardCategory) => void;
-	onDeselectFilterCategory: (category: CardCategory) => void;
+	onDeselectFilterCategory: () => void;
 }
 function SideNavbar(props: SideNavbarProps) {
 	const [selectedCategory, setSelectedCategory] =
 		useState<CardCategory | null>(null);
+
 	function getSvgFromCategory(category: CardCategory): JSX.Element {
 		const styleStroke = "stroke-side-nav-primary";
 		const styleFill = " fill-side-nav-primary";
@@ -48,6 +51,21 @@ function SideNavbar(props: SideNavbarProps) {
 				return <></>;
 		}
 	}
+
+	function getNumOfUniqueUsersFromFilteredCards(
+		cardsData: CardData[],
+		filteredCategory: CardCategory
+	): number {
+		return Array.from(
+			new Set(
+				cardsData
+					.filter((card) => card.category === filteredCategory)
+					.map((cardData) => {
+						return cardData.author.name;
+					})
+			)
+		).length;
+	}
 	return (
 		<div className="h-screen w-[230px] shrink-0 bg-side-nav-body flex flex-col">
 			<div className="h-[90px] bg-side-nav-header flex justify-center items-center shrink-0   ">
@@ -63,24 +81,25 @@ function SideNavbar(props: SideNavbarProps) {
 						<CategoryTab
 							isSelected={selectedCategory === CardCategory[key]}
 							category={CardCategory[key]}
-							users={10}
+							users={getNumOfUniqueUsersFromFilteredCards(
+								props.cardsData,
+								CardCategory[key]
+							)}
 							icon={getSvgFromCategory(CardCategory[key])}
 							onSelect={(category: CardCategory) => {
 								setSelectedCategory(category);
 								props.onSelectFilterCategory(CardCategory[key]);
 							}}
-							onDeselect={(category: CardCategory) => {
+							onDeselect={() => {
 								setSelectedCategory(null);
-								props.onDeselectFilterCategory(
-									CardCategory[key]
-								);
+								props.onDeselectFilterCategory();
 							}}
 						></CategoryTab>
 					);
 				})}
 			</div>
 			<div className="h-[60px] p-3 bg-side-nav-header flex flex-row gap-4 items-center">
-				<div className="w-10 h-10 rounded-full bg-card-body shrink-0"></div>
+				<ProfileIcon name={props.user.name}></ProfileIcon>
 				<p className="text-side-nav-primary font-bold text-sm">
 					{props.user.name}
 				</p>
