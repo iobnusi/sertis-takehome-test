@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./basic/Button";
 import CardColumns from "./CardColumns";
-import { CardData } from "./card/card_util";
+import { CardCategory, CardData } from "./card/card_util";
 import CardForm from "./card/CardForm";
 import { FormState, emptyFormState } from "./card/form_reducer";
 import { User } from "./utils/user_util";
 import CardEditModal from "./modal/CardEditModal";
 import { v4 as uuidv4 } from "uuid";
+import CardDeleteModal from "./modal/CardDeleteModal";
 
 interface BoardProps {
 	cardsData: CardData[];
 	user: User;
 	className?: string;
+	filterCategory: CardCategory | null;
 }
 
 function Board(props: BoardProps) {
@@ -19,6 +21,7 @@ function Board(props: BoardProps) {
 	const [editFormState, setEditFormState] = useState(emptyFormState);
 	const [cardsData, setCardsData] = useState(props.cardsData);
 	const [isEditModalOpen, setEditModalOpen] = useState(false);
+	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
 	const handleCreate = (formState: FormState) => {
 		setCardsData([
@@ -59,6 +62,13 @@ function Board(props: BoardProps) {
 		setEditModalOpen(false);
 	};
 
+	const handleDelete = (cardId: string) => {
+		setCardsData((prevCardsData) =>
+			prevCardsData.filter((card) => card.id !== cardId)
+		);
+		setDeleteModalOpen(false);
+	};
+
 	const openCardEditModal = (cardFormState: FormState) => {
 		setEditFormState({
 			id: cardFormState.id,
@@ -69,6 +79,18 @@ function Board(props: BoardProps) {
 		});
 		setEditModalOpen(true);
 	};
+
+	const openCardDeleteModal = (cardId: string) => {
+		setEditFormState({
+			id: cardId,
+			category: undefined,
+			content: "",
+			name: "",
+			status: undefined,
+		});
+		setDeleteModalOpen(true);
+	};
+
 	return (
 		<div className="h-screen w-full flex flex-col">
 			<header
@@ -76,9 +98,11 @@ function Board(props: BoardProps) {
 			>
 				{navButtons.map((name) => {
 					return (
-						<Button className="w-[150px] font-thin text-3xl text-card-body ">
-							{name}
-						</Button>
+						<li key={name} className="w-[150px] list-none">
+							<Button className="h-full w-full	 font-thin text-3xl text-card-body ">
+								{name}
+							</Button>
+						</li>
 					);
 				})}
 			</header>
@@ -92,9 +116,12 @@ function Board(props: BoardProps) {
 					}}
 				></CardForm>
 				<CardColumns
+					key="card-columns"
 					currentUser={props.user}
 					cardsData={cardsData}
+					filterCategory={props.filterCategory}
 					editCallback={openCardEditModal}
+					deleteCallback={openCardDeleteModal}
 				></CardColumns>
 				<CardEditModal
 					isOpen={isEditModalOpen}
@@ -102,6 +129,12 @@ function Board(props: BoardProps) {
 					handleClose={() => setEditModalOpen(false)}
 					handleUpdate={handleUpdate}
 				></CardEditModal>
+				<CardDeleteModal
+					isOpen={isDeleteModalOpen}
+					cardId={editFormState.id}
+					handleClose={() => setDeleteModalOpen(false)}
+					handleDelete={handleDelete}
+				></CardDeleteModal>
 			</div>
 		</div>
 	);

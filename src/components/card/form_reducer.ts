@@ -14,7 +14,7 @@ interface FormAction {
 }
 
 export interface FormState {
-	id: string | undefined;
+	id: string;
 	name: string;
 	status: CardStatus | undefined;
 	content: string;
@@ -22,7 +22,7 @@ export interface FormState {
 }
 
 export const emptyFormState: FormState = {
-	id: undefined,
+	id: "",
 	category: undefined,
 	content: "",
 	name: "name",

@@ -9,7 +9,7 @@ interface ButtonProps {
 function Button(props: ButtonProps) {
 	return (
 		<button
-			className={props.className}
+			className={`${props.className} hover:bg-button-hover`}
 			onClick={props.onClick}
 			disabled={props.disabled}
 		>

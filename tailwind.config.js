@@ -9,6 +9,7 @@ module.exports = {
 			},
 			colors: {
 				board: "#F2F1F6",
+				"button-hover": "#E6E6E6",
 				"side-nav-header": "#29CBFF",
 				"side-nav-body": "#22B3E1",
 				"side-nav-icon": "#20ACD7",
@@ -18,6 +19,7 @@ module.exports = {
 				"card-body": "#A6A6A8",
 				"card-title": "#52467D",
 				"like-red": "#F91880",
+				delete: "#ED1C24",
 				"status-hot-take": "#ED1C24",
 				"status-true-fact": "#69CFF1",
 				"status-interesting": "#87E1C3",

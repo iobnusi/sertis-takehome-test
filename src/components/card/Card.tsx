@@ -6,33 +6,36 @@ import {
 	getTimeElapsedFromDatePosted,
 	parseCardDataToFormState,
 } from "./card_util";
-import EditSvg from "../svgs/EditSvg";
 import StatusIcon from "../basic/StatusIcon";
+import EditOptionsDropdown from "../dropdown/EditOptionsDropdown";
+import { EditAction } from "../dropdown/edit_options_util";
 
 function Card(props: CardProps) {
 	const [isLiked, setIsLiked] = useState(false);
 
 	return (
-		<div className="bg-white p-5 flex flex-col gap-8 w-full h-fit">
-			<div className="flex flex-col gap-4">
-				<div className="flex flex-row justify-between">
+		<div
+			key={props.key}
+			className="bg-white p-5 flex flex-col gap-8 w-full h-fit"
+		>
+			<div className="flex flex-col gap-2">
+				<div className="h-6 flex flex-row justify-between items-center">
 					<p className="font-bold text-xs text-card-title">
 						{props.data.category
 							? props.data.category.toUpperCase()
 							: null}
 					</p>
-					<div className="flex flex-row gap-2">
+					<div className="flex flex-row gap-2 items-center">
 						{props.isEditable ? (
-							<Button
-								className=""
-								onClick={() => {
-									props.editCallback(
-										parseCardDataToFormState(props.data)
-									);
+							<EditOptionsDropdown
+								onSelectAction={(action: EditAction) => {
+									if (action === EditAction.edit)
+										props.editCallback(
+											parseCardDataToFormState(props.data)
+										);
+									else props.deleteCallback(props.data.id);
 								}}
-							>
-								<EditSvg className="h-4 w-4 fill-card-title"></EditSvg>
-							</Button>
+							></EditOptionsDropdown>
 						) : null}
 						<StatusIcon
 							className="h-4 w-4"

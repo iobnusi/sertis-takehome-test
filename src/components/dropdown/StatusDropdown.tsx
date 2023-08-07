@@ -54,7 +54,7 @@ function StatusDropdown(props: StatusDropdownProps) {
 					).map((key, index) => {
 						return (
 							<Button
-								className="h-12 shrink-0 px-4 py-1 hover:bg-card-body"
+								className="h-12 shrink-0 px-4 py-1 "
 								onClick={() => {
 									setOpen(false);
 									props.onSelectStatus(CardStatus[key]);

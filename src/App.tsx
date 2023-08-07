@@ -11,6 +11,10 @@ import {
 import { User } from "./components/utils/user_util";
 
 function App() {
+	const [filterCategory, setFilterCategory] = useState<CardCategory | null>(
+		null
+	);
+
 	const currentUser: User = {
 		id: "91c5f082-32a4-11ee-be56-0242ac120002",
 		name: "Eisen Lance De Guzman",
@@ -37,8 +41,21 @@ function App() {
 		<div
 			className={`scrollbar1 center h-screen w-[840px] bg-board absolute left-0 flex flex-row`}
 		>
-			<SideNavbar user={currentUser}></SideNavbar>
-			<Board user={currentUser} cardsData={mockCardsData}></Board>
+			<SideNavbar
+				key="side-navbar"
+				user={currentUser}
+				onSelectFilterCategory={(category: CardCategory) => {
+					setFilterCategory(category);
+				}}
+				onDeselectFilterCategory={(category: CardCategory) => {
+					setFilterCategory(null);
+				}}
+			></SideNavbar>
+			<Board
+				user={currentUser}
+				cardsData={mockCardsData}
+				filterCategory={filterCategory}
+			></Board>
 		</div>
 	);
 }

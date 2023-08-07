@@ -21,9 +21,11 @@ export enum CardStatus {
 }
 
 export interface CardProps {
+	key: string;
 	data: CardData;
 	isEditable: boolean;
 	editCallback: (cardFormState: FormState) => void;
+	deleteCallback: (cardId: string) => void;
 }
 
 export interface CardData {

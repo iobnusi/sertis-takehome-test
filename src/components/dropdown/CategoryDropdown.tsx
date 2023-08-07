@@ -53,7 +53,7 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 					).map((key) => {
 						return (
 							<Button
-								className="h-12 shrink-0 px-4 py-1 hover:bg-card-body"
+								className="h-12 shrink-0 px-4 py-1 "
 								onClick={() => {
 									setOpen(false);
 									props.onSelectCategory(CardCategory[key]);
