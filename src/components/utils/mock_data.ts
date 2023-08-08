@@ -32,7 +32,7 @@ export const mockCardsData: CardData[] = [
 		likes: 69,
 	},
 	{
-		id: "c8ed7ea4-eaf1-47c9-87a3-fe8bde42d7bd",
+		id: "c8ed7ea4-eaf1-47c9-87a3-fe8bde42u7bd",
 		category: CardCategory.engineering,
 		content:
 			"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur, cumque ab veritatis quasi autem aperiam",

@@ -35,7 +35,7 @@ function Card(props: CardProps) {
 				exit={true}
 			>
 				<div className=" bg-white mobile:p-3 tablet:p-5 flex flex-col gap-5 w-full">
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<div className="h-6 flex flex-row justify-between items-center">
 							<p className="font-bold text-xs text-card-title">
 								{props.data.category
@@ -67,7 +67,7 @@ function Card(props: CardProps) {
 							</div>
 						</div>
 
-						<p className="mobile:text-base tablet:text-lg text-card-body ">
+						<p className="mobile:text-base tablet:text-lg text-card-body break-all">
 							{props.data.content}
 						</p>
 						<div className="flex flex-row h-4 gap-2">
