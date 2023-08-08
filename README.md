@@ -1,3 +1,18 @@
+# Sertis Takehome Exam Submission
+A mock-up mini-blog application writen and submitted by Eisen Lance De Guzman. Other than the used libraries shown, all other components were made from scratch.
+
+### Tech Stack used:
+- React Typescript
+- TailwindCSS
+
+### React Libraries Used:
+- Create React App
+- React Transition Group
+- React Autosize
+- UUID V4
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
