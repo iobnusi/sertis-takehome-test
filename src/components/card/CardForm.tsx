@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import TextArea from "../basic/TextArea";
 import Line from "../basic/Line";
 import Button from "../basic/Button";
@@ -19,7 +19,6 @@ interface CardFormProps {
 	className?: string;
 	author: User;
 	textAreaRows: number;
-	previewFilePath: string;
 	isEditMode: boolean;
 	initFormState?: FormState;
 	submitButtonCondition: (formState: FormState) => boolean;
@@ -30,11 +29,7 @@ function CardForm(props: CardFormProps) {
 		formReducer,
 		props.initFormState ?? emptyFormState
 	);
-	console.log(formState);
 
-	useEffect(() => {
-		console.log(formState);
-	}, [formState]);
 	return (
 		<div
 			className={` ${props.className} w-full h-fit bg-white flex flex-row gap-2`}

@@ -1,5 +1,4 @@
 import Modal from "./Modal";
-import CloseSvg from "../svgs/CloseSvg";
 import Button from "../basic/Button";
 
 interface CardDeleteModalProps {

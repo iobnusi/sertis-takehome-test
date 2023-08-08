@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
 import {
@@ -23,10 +23,6 @@ function Card(props: CardProps) {
 	useEffect(() => {
 		if (props.runAnimOnLoad) setAnim(true);
 	}, []);
-
-	useEffect(() => {
-		console.log(props.data.imgSrc);
-	}, [props.data.imgSrc]);
 
 	return (
 		<div className="h-fit">

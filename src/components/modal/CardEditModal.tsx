@@ -4,8 +4,6 @@ import { FormState } from "../card/form_reducer";
 import CloseSvg from "../svgs/CloseSvg";
 import Button from "../basic/Button";
 import { User } from "../utils/user_util";
-import { file } from "@babel/types";
-import { useState } from "react";
 
 interface CardEditModalProps {
 	className?: string;
@@ -37,7 +35,6 @@ function CardEditModal(props: CardEditModalProps) {
 			<CardForm
 				author={props.author}
 				handleSubmit={props.handleUpdate}
-				previewFilePath={props.formState.imgSrc ?? ""}
 				isEditMode={true}
 				textAreaRows={1}
 				initFormState={props.formState}
