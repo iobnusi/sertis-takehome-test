@@ -10,7 +10,7 @@ interface StatusDropdownProps {
 }
 
 function StatusDropdown(props: StatusDropdownProps) {
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	const dropdown = useRef<HTMLDivElement>(null);
 

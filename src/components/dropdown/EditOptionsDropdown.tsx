@@ -9,7 +9,7 @@ interface EditOptionsDropdownProps {
 }
 
 function EditOptionsDropdown(props: EditOptionsDropdownProps) {
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	const dropdown = useRef<HTMLDivElement>(null);
 
