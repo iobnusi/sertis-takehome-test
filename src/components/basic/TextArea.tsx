@@ -17,6 +17,7 @@ function TextArea(props: TextAreaProps) {
 	}, []);
 	return (
 		<textarea
+			id="textarea"
 			className={props.className}
 			placeholder={props.placeholder}
 			rows={props.rows ?? 1}

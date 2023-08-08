@@ -34,7 +34,7 @@ function StatusDropdown(props: StatusDropdownProps) {
 	return (
 		<div className="w-fit relative" ref={dropdown}>
 			<Button
-				className=" px-3 rounded-full flex flex-row gap-2 items-center hover:bg-card-body "
+				className=" px-3 rounded-full flex flex-row gap-2 items-center  "
 				onClick={() => {
 					setOpen(!open);
 				}}
@@ -53,17 +53,19 @@ function StatusDropdown(props: StatusDropdownProps) {
 						Object.keys(CardStatus) as (keyof typeof CardStatus)[]
 					).map((key, index) => {
 						return (
-							<Button
-								className="h-12 shrink-0 px-4 py-1 "
-								onClick={() => {
-									setOpen(false);
-									props.onSelectStatus(CardStatus[key]);
-								}}
-							>
-								<p className="font-semibold text-start text-sm">
-									{CardStatus[key]}
-								</p>
-							</Button>
+							<li key={key} className="list-none">
+								<Button
+									className="h-12 shrink-0 px-4 py-1 "
+									onClick={() => {
+										setOpen(false);
+										props.onSelectStatus(CardStatus[key]);
+									}}
+								>
+									<p className="font-semibold text-start text-sm">
+										{CardStatus[key]}
+									</p>
+								</Button>
+							</li>
 						);
 					})}
 				</div>

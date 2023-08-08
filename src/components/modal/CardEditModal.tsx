@@ -16,7 +16,7 @@ interface CardEditModalProps {
 function CardEditModal(props: CardEditModalProps) {
 	return (
 		<Modal
-			className="flex flex-col px-5 pb-5 pt-3 gap-6"
+			className="flex flex-col px-5 pb-5 pt-3 gap-6 rounded"
 			isOpen={props.isOpen}
 			handleClose={props.handleClose}
 		>

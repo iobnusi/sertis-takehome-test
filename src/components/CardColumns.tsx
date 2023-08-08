@@ -2,23 +2,20 @@ import Card from "./card/Card";
 import { CardCategory, CardData } from "./card/card_util";
 import { User } from "./utils/user_util";
 import { FormState } from "./card/form_reducer";
-import { CSSTransition } from "react-transition-group";
-import { useState } from "react";
 import "../App.css";
-
+import { animated, useTransition } from "react-spring";
 interface CardColumnsProps {
-	key: string;
 	cardsData: CardData[];
+	latestCardId: string;
 	currentUser: User;
 	filterCategory: CardCategory | null;
-
 	editCallback: (cardFormState: FormState) => void;
 	deleteCallback: (cardId: string) => void;
 }
 
 function CardColumns(props: CardColumnsProps) {
 	return (
-		<div key={props.key} className="h-full w-full flex flex-row gap-4 ">
+		<div className="h-full w-full flex flex-row gap-4 ">
 			<div className="w-[calc(50%-8px)] h-fit  flex flex-col gap-4 shrink-0">
 				{props.cardsData
 					.filter(
@@ -29,16 +26,20 @@ function CardColumns(props: CardColumnsProps) {
 					.map((cardData, i) => {
 						if (i % 2 === 0)
 							return (
-								<Card
-									key={`card-${cardData.id}`}
-									data={cardData}
-									isEditable={
-										props.currentUser.id ===
-										cardData.author.id
-									}
-									editCallback={props.editCallback}
-									deleteCallback={props.deleteCallback}
-								></Card>
+								<li key={cardData.id} className="list-none">
+									<Card
+										runAnimOnLoad={
+											cardData.id === props.latestCardId
+										}
+										data={cardData}
+										isEditable={
+											props.currentUser.id ===
+											cardData.author.id
+										}
+										editCallback={props.editCallback}
+										deleteCallback={props.deleteCallback}
+									></Card>
+								</li>
 							);
 						else return <></>;
 					})}
@@ -53,20 +54,39 @@ function CardColumns(props: CardColumnsProps) {
 					.map((cardData, i) => {
 						if (i % 2 === 1)
 							return (
-								<Card
-									key={`card-${cardData.id}`}
-									data={cardData}
-									isEditable={
-										props.currentUser.id ===
-										cardData.author.id
-									}
-									editCallback={props.editCallback}
-									deleteCallback={props.deleteCallback}
-								></Card>
+								<li key={cardData.id} className="list-none">
+									<Card
+										runAnimOnLoad={
+											cardData.id === props.latestCardId
+										}
+										data={cardData}
+										isEditable={
+											props.currentUser.id ===
+											cardData.author.id
+										}
+										editCallback={props.editCallback}
+										deleteCallback={props.deleteCallback}
+									></Card>
+								</li>
 							);
 						else return <></>;
 					})}
 			</div>
+			{/* <ul className="h-full ">
+				{transitions((style, cardData, t, index) => (
+					<animated.div className="">
+						<Card
+							runAnimOnLoad={cardData.id === props.latestCardId}
+							data={cardData}
+							isEditable={
+								props.currentUser.id === cardData.author.id
+							}
+							editCallback={props.editCallback}
+							deleteCallback={props.deleteCallback}
+						></Card>
+					</animated.div>
+				))}
+			</ul> */}
 		</div>
 	);
 }

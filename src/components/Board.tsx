@@ -10,6 +10,7 @@ import CardDeleteModal from "./modal/CardDeleteModal";
 
 interface BoardProps {
 	cardsData: CardData[];
+	latestCardId: string;
 	user: User;
 	className?: string;
 	filterCategory: CardCategory | null;
@@ -75,7 +76,7 @@ function Board(props: BoardProps) {
 					);
 				})}
 			</header>
-			<div className="p-4 overflow-auto flex flex-col gap-4">
+			<div className="p-4 overflow-auto flex flex-col h-full gap-4">
 				<CardForm
 					className="p-5"
 					author={props.user}
@@ -86,9 +87,9 @@ function Board(props: BoardProps) {
 					}}
 				></CardForm>
 				<CardColumns
-					key="card-columns"
 					currentUser={props.user}
 					cardsData={props.cardsData}
+					latestCardId={props.latestCardId}
 					filterCategory={props.filterCategory}
 					editCallback={openCardEditModal}
 					deleteCallback={openCardDeleteModal}

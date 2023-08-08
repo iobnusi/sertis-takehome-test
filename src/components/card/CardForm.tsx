@@ -73,6 +73,9 @@ function CardForm(props: CardFormProps) {
 						className="w-20 h-8 rounded-full bg-card-title disabled:bg-card-body"
 						disabled={props.submitButtonCondition(formState)}
 						onClick={() => {
+							document
+								.getElementById("textarea")
+								?.setAttribute("style", "");
 							props.handleSubmit(formState);
 							dispatch({
 								type: FormActionType.reset,

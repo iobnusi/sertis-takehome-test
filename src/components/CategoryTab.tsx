@@ -13,10 +13,7 @@ interface CategoryTabProps {
 
 function CategoryTab(props: CategoryTabProps) {
 	return (
-		<li
-			key={props.category}
-			className="h-[70px] w-[225px] shrink-0  list-none"
-		>
+		<div className="h-[70px] w-[225px] shrink-0  list-none">
 			<Button
 				className={`w-full h-full flex flex-row ${
 					props.isSelected ? "bg-side-nav-icon" : "bg-side-nav-body"
@@ -39,7 +36,7 @@ function CategoryTab(props: CategoryTabProps) {
 					</p>
 				</div>
 			</Button>
-		</li>
+		</div>
 	);
 }
 

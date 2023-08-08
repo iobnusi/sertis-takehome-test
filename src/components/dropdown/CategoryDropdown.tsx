@@ -34,7 +34,7 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 	return (
 		<div className="w-fit relative" ref={dropdown}>
 			<Button
-				className="bg-card-title px-3 rounded-full flex flex-row gap-1 items-center"
+				className="bg-card-title px-3 rounded-full flex flex-row gap-1 items-center hover:!bg-card-title"
 				onClick={() => {
 					setOpen(!open);
 				}}
@@ -52,17 +52,21 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 						) as (keyof typeof CardCategory)[]
 					).map((key) => {
 						return (
-							<Button
-								className="h-12 shrink-0 px-4 py-1 "
-								onClick={() => {
-									setOpen(false);
-									props.onSelectCategory(CardCategory[key]);
-								}}
-							>
-								<p className="font-semibold text-start text-sm">
-									{CardCategory[key]}
-								</p>
-							</Button>
+							<li key={key} className="list-none">
+								<Button
+									className="h-12 w-full shrink-0 px-4 py-1 "
+									onClick={() => {
+										setOpen(false);
+										props.onSelectCategory(
+											CardCategory[key]
+										);
+									}}
+								>
+									<p className="font-semibold text-start text-sm">
+										{CardCategory[key]}
+									</p>
+								</Button>
+							</li>
 						);
 					})}
 				</div>

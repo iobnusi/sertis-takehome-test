@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
 import {
@@ -10,15 +10,26 @@ import StatusIcon from "../basic/StatusIcon";
 import EditOptionsDropdown from "../dropdown/EditOptionsDropdown";
 import { EditAction } from "../dropdown/edit_options_util";
 import ProfileIcon from "../basic/ProfileIcon";
+import { CSSTransition } from "react-transition-group";
+import "./Card.css";
 
 function Card(props: CardProps) {
 	const [isLiked, setIsLiked] = useState(false);
+	const [isAnim, setAnim] = useState(false);
+
+	useEffect(() => {
+		if (props.runAnimOnLoad) setAnim(true);
+	}, []);
 
 	return (
-		<div
-			key={props.key}
-			className="slide-bottom bg-white p-5 flex flex-col gap-8 w-full h-fit"
-		>
+		// <CSSTransition
+		// 	in={isAnim}
+		// 	timeout={250}
+		// 	classNames={"card"}
+		// 	enter={true}
+		// 	exit={true}
+		// >
+		<div className=" bg-white p-5 flex flex-col gap-8 w-full h-fit">
 			<div className="flex flex-col gap-2">
 				<div className="h-6 flex flex-row justify-between items-center">
 					<p className="font-bold text-xs text-card-title">
@@ -34,7 +45,9 @@ function Card(props: CardProps) {
 										props.editCallback(
 											parseCardDataToFormState(props.data)
 										);
-									else props.deleteCallback(props.data.id);
+									else {
+										props.deleteCallback(props.data.id);
+									}
 								}}
 							></EditOptionsDropdown>
 						) : null}
@@ -89,6 +102,7 @@ function Card(props: CardProps) {
 				</div>
 			</div>
 		</div>
+		// </CSSTransition>
 	);
 }
 

@@ -21,9 +21,9 @@ export enum CardStatus {
 }
 
 export interface CardProps {
-	key: string;
 	data: CardData;
 	isEditable: boolean;
+	runAnimOnLoad: boolean;
 	editCallback: (cardFormState: FormState) => void;
 	deleteCallback: (cardId: string) => void;
 }
@@ -38,6 +38,7 @@ export interface CardData {
 	likes?: number;
 	commentCount?: number;
 	datePosted: Date;
+	justCreated?: boolean;
 }
 
 export function getTimeElapsedFromDatePosted(date: Date): string {

@@ -78,23 +78,29 @@ function SideNavbar(props: SideNavbarProps) {
 					Object.keys(CardCategory) as (keyof typeof CardCategory)[]
 				).map((key, index) => {
 					return (
-						<CategoryTab
-							isSelected={selectedCategory === CardCategory[key]}
-							category={CardCategory[key]}
-							users={getNumOfUniqueUsersFromFilteredCards(
-								props.cardsData,
-								CardCategory[key]
-							)}
-							icon={getSvgFromCategory(CardCategory[key])}
-							onSelect={(category: CardCategory) => {
-								setSelectedCategory(category);
-								props.onSelectFilterCategory(CardCategory[key]);
-							}}
-							onDeselect={() => {
-								setSelectedCategory(null);
-								props.onDeselectFilterCategory();
-							}}
-						></CategoryTab>
+						<li key={key} className="list-none">
+							<CategoryTab
+								isSelected={
+									selectedCategory === CardCategory[key]
+								}
+								category={CardCategory[key]}
+								users={getNumOfUniqueUsersFromFilteredCards(
+									props.cardsData,
+									CardCategory[key]
+								)}
+								icon={getSvgFromCategory(CardCategory[key])}
+								onSelect={(category: CardCategory) => {
+									setSelectedCategory(category);
+									props.onSelectFilterCategory(
+										CardCategory[key]
+									);
+								}}
+								onDeselect={() => {
+									setSelectedCategory(null);
+									props.onDeselectFilterCategory();
+								}}
+							></CategoryTab>
+						</li>
 					);
 				})}
 			</div>

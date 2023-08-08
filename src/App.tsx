@@ -17,8 +17,9 @@ function App() {
 		null
 	);
 	const [cardsData, setCardsData] = useState(mockCardsData);
-
+	const [latestCardId, setLatestCardId] = useState<string>("");
 	const createCard = (formState: FormState) => {
+		const newCardId = uuidv4();
 		setCardsData([
 			{
 				category: formState.category,
@@ -29,10 +30,12 @@ function App() {
 				commentCount: 0,
 				likes: 0,
 				author: currentUser, // user is independent from the formState and is based on Board props
-				id: uuidv4(), // create a unique id
+				id: newCardId, // create a unique id
+				justCreated: true,
 			},
 			...cardsData,
 		]);
+		setLatestCardId(newCardId);
 	};
 
 	const editCard = (formState: FormState) => {
@@ -77,6 +80,7 @@ function App() {
 			<Board
 				user={currentUser}
 				cardsData={cardsData}
+				latestCardId={latestCardId}
 				filterCategory={filterCategory}
 				createCard={createCard}
 				deleteCard={deleteCard}
