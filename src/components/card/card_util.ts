@@ -38,6 +38,7 @@ export interface CardData {
 	author: User;
 	likes?: number;
 	commentCount?: number;
+	imgSrc?: string;
 	datePosted: Date;
 }
 
@@ -73,6 +74,7 @@ export function parseCardDataToFormState(data: CardData): FormState {
 		content: data.content,
 		name: data.name ?? "",
 		status: data.status,
+		imgSrc: data.imgSrc,
 	};
 	return formState;
 }

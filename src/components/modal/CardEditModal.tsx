@@ -4,6 +4,8 @@ import { FormState } from "../card/form_reducer";
 import CloseSvg from "../svgs/CloseSvg";
 import Button from "../basic/Button";
 import { User } from "../utils/user_util";
+import { file } from "@babel/types";
+import { useState } from "react";
 
 interface CardEditModalProps {
 	className?: string;
@@ -14,6 +16,11 @@ interface CardEditModalProps {
 	handleClose: () => void;
 }
 function CardEditModal(props: CardEditModalProps) {
+	const [previewImage, setPreviewImage] = useState(
+		props.formState.imgSrc ?? ""
+	);
+	console.log(previewImage);
+
 	return (
 		<Modal
 			className="flex flex-col px-5 pb-5 pt-3 gap-6 rounded"
@@ -35,6 +42,7 @@ function CardEditModal(props: CardEditModalProps) {
 			<CardForm
 				author={props.author}
 				handleSubmit={props.handleUpdate}
+				previewFilePath={previewImage}
 				textAreaRows={1}
 				initFormState={props.formState}
 				submitButtonCondition={(formState) => {

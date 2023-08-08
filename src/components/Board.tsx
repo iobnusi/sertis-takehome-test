@@ -23,7 +23,7 @@ function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
 	const [editFormState, setEditFormState] = useState(emptyFormState);
 	const [isEditModalOpen, setEditModalOpen] = useState(false);
-
+	const [previewImage, setPreviewImage] = useState("");
 	const handleCreate = (formState: FormState) => {
 		props.createCard(formState);
 	};
@@ -34,12 +34,14 @@ function Board(props: BoardProps) {
 	};
 
 	const openCardEditModal = (cardFormState: FormState) => {
+		console.log(cardFormState);
 		setEditFormState({
 			id: cardFormState.id,
 			category: cardFormState.category,
 			content: cardFormState.content,
 			name: cardFormState.name,
 			status: cardFormState.status,
+			imgSrc: cardFormState.imgSrc, //TODO
 		});
 		setEditModalOpen(true);
 	};
@@ -63,6 +65,7 @@ function Board(props: BoardProps) {
 				<CardForm
 					className="z-0 mobile:p-3 tablet:p-5"
 					author={props.user}
+					previewFilePath={previewImage}
 					handleSubmit={handleCreate}
 					textAreaRows={1}
 					submitButtonCondition={(formState) => {

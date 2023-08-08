@@ -5,6 +5,7 @@ export enum FormActionType {
 	status_update,
 	content_update,
 	category_update,
+	imgSrc_update,
 	reset,
 }
 
@@ -19,6 +20,7 @@ export interface FormState {
 	status: CardStatus | undefined;
 	content: string;
 	category: CardCategory | undefined;
+	imgSrc: string | undefined;
 }
 
 export const emptyFormState: FormState = {
@@ -27,6 +29,7 @@ export const emptyFormState: FormState = {
 	content: "",
 	name: "name",
 	status: undefined,
+	imgSrc: undefined,
 };
 
 const formReducer = (state: FormState, action: FormAction) => {
@@ -50,6 +53,11 @@ const formReducer = (state: FormState, action: FormAction) => {
 			return {
 				...state,
 				category: action.payload,
+			};
+		case FormActionType.imgSrc_update:
+			return {
+				...state,
+				imgSrc: action.payload,
 			};
 		case FormActionType.reset:
 			return emptyFormState;

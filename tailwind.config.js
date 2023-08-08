@@ -34,6 +34,7 @@ module.exports = {
 				"profile-1": "#FF40F6",
 				"profile-2": "#19ADFF",
 				"profile-3": "#02C97A",
+				"image-close": "#4C4C4D",
 			},
 		},
 	},
