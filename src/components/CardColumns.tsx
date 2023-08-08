@@ -4,6 +4,7 @@ import { User } from "./utils/user_util";
 import { FormState } from "./card/form_reducer";
 import "../App.css";
 import { animated, useTransition } from "react-spring";
+import { useEffect } from "react";
 interface CardColumnsProps {
 	cardsData: CardData[];
 	latestCardId: string;
@@ -14,6 +15,7 @@ interface CardColumnsProps {
 }
 
 function CardColumns(props: CardColumnsProps) {
+	useEffect(() => console.log(props.latestCardId), [props.latestCardId]);
 	return (
 		<div className="h-full w-full flex flex-row gap-4 ">
 			<div className="w-[calc(50%-8px)] h-fit  flex flex-col gap-4 shrink-0">
@@ -29,6 +31,10 @@ function CardColumns(props: CardColumnsProps) {
 								<li key={cardData.id} className="list-none">
 									<Card
 										runAnimOnLoad={
+											cardData.author.id ===
+											props.currentUser.id
+										}
+										enableEnterAnim={
 											cardData.id === props.latestCardId
 										}
 										data={cardData}
@@ -57,7 +63,8 @@ function CardColumns(props: CardColumnsProps) {
 								<li key={cardData.id} className="list-none">
 									<Card
 										runAnimOnLoad={
-											cardData.id === props.latestCardId
+											cardData.author.id ===
+											props.currentUser.id
 										}
 										data={cardData}
 										isEditable={
@@ -72,21 +79,6 @@ function CardColumns(props: CardColumnsProps) {
 						else return <></>;
 					})}
 			</div>
-			{/* <ul className="h-full ">
-				{transitions((style, cardData, t, index) => (
-					<animated.div className="">
-						<Card
-							runAnimOnLoad={cardData.id === props.latestCardId}
-							data={cardData}
-							isEditable={
-								props.currentUser.id === cardData.author.id
-							}
-							editCallback={props.editCallback}
-							deleteCallback={props.deleteCallback}
-						></Card>
-					</animated.div>
-				))}
-			</ul> */}
 		</div>
 	);
 }

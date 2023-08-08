@@ -24,6 +24,7 @@ export interface CardProps {
 	data: CardData;
 	isEditable: boolean;
 	runAnimOnLoad: boolean;
+	enableEnterAnim?: boolean;
 	editCallback: (cardFormState: FormState) => void;
 	deleteCallback: (cardId: string) => void;
 }
@@ -38,7 +39,6 @@ export interface CardData {
 	likes?: number;
 	commentCount?: number;
 	datePosted: Date;
-	justCreated?: boolean;
 }
 
 export function getTimeElapsedFromDatePosted(date: Date): string {

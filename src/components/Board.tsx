@@ -23,7 +23,6 @@ function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
 	const [editFormState, setEditFormState] = useState(emptyFormState);
 	const [isEditModalOpen, setEditModalOpen] = useState(false);
-	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
 	const handleCreate = (formState: FormState) => {
 		props.createCard(formState);
@@ -32,11 +31,6 @@ function Board(props: BoardProps) {
 	const handleUpdate = (formState: FormState) => {
 		props.editCard(formState);
 		setEditModalOpen(false);
-	};
-
-	const handleDelete = (cardId: string) => {
-		props.deleteCard(cardId);
-		setDeleteModalOpen(false);
 	};
 
 	const openCardEditModal = (cardFormState: FormState) => {
@@ -48,17 +42,6 @@ function Board(props: BoardProps) {
 			status: cardFormState.status,
 		});
 		setEditModalOpen(true);
-	};
-
-	const openCardDeleteModal = (cardId: string) => {
-		setEditFormState({
-			id: cardId,
-			category: undefined,
-			content: "",
-			name: "",
-			status: undefined,
-		});
-		setDeleteModalOpen(true);
 	};
 
 	return (
@@ -92,7 +75,7 @@ function Board(props: BoardProps) {
 					latestCardId={props.latestCardId}
 					filterCategory={props.filterCategory}
 					editCallback={openCardEditModal}
-					deleteCallback={openCardDeleteModal}
+					deleteCallback={props.deleteCard}
 				></CardColumns>
 				<CardEditModal
 					isOpen={isEditModalOpen}
@@ -101,12 +84,6 @@ function Board(props: BoardProps) {
 					handleClose={() => setEditModalOpen(false)}
 					handleUpdate={handleUpdate}
 				></CardEditModal>
-				<CardDeleteModal
-					isOpen={isDeleteModalOpen}
-					cardId={editFormState.id}
-					handleClose={() => setDeleteModalOpen(false)}
-					handleDelete={handleDelete}
-				></CardDeleteModal>
 			</div>
 		</div>
 	);

@@ -20,6 +20,7 @@ function App() {
 	const [latestCardId, setLatestCardId] = useState<string>("");
 	const createCard = (formState: FormState) => {
 		const newCardId = uuidv4();
+		setLatestCardId(newCardId);
 		setCardsData([
 			{
 				category: formState.category,
@@ -31,11 +32,9 @@ function App() {
 				likes: 0,
 				author: currentUser, // user is independent from the formState and is based on Board props
 				id: newCardId, // create a unique id
-				justCreated: true,
 			},
 			...cardsData,
 		]);
-		setLatestCardId(newCardId);
 	};
 
 	const editCard = (formState: FormState) => {
