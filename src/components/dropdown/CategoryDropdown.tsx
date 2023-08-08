@@ -39,8 +39,8 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 					setOpen(!open);
 				}}
 			>
-				<small className="text-white font-bold">
-					{props.category ? props.category : "Select Category"}
+				<small className="mobile:text-xs text-white font-bold">
+					{props.category ? props.category : "Category"}
 				</small>
 				<ChevronDownSvg className="h-4 w-4 text-white"></ChevronDownSvg>
 			</Button>
@@ -54,7 +54,7 @@ function CategoryDropdown(props: CategoryDropdownProps) {
 						return (
 							<li key={key} className="list-none">
 								<Button
-									className="h-12 w-full shrink-0 px-4 py-1 "
+									className="h-12 w-40 shrink-0 px-4 py-1 "
 									onClick={() => {
 										setOpen(false);
 										props.onSelectCategory(

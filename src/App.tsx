@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { mockCardsData } from "./components/utils/mock_data";
 
 function App() {
-	const currentUser: User = {
+	const mockCurrentUser: User = {
 		id: "91c5f082-32a4-11ee-be56-0242ac120002",
 		name: "Eisen Lance De Guzman",
 	};
@@ -18,6 +18,7 @@ function App() {
 	);
 	const [cardsData, setCardsData] = useState(mockCardsData);
 	const [latestCardId, setLatestCardId] = useState<string>("");
+
 	const createCard = (formState: FormState) => {
 		const newCardId = uuidv4();
 		setLatestCardId(newCardId);
@@ -30,7 +31,7 @@ function App() {
 				datePosted: new Date(),
 				commentCount: 0,
 				likes: 0,
-				author: currentUser, // user is independent from the formState and is based on Board props
+				author: mockCurrentUser, // user is independent from the formState and is based on mock user data
 				id: newCardId, // create a unique id
 			},
 			...cardsData,
@@ -64,10 +65,10 @@ function App() {
 	};
 	return (
 		<div
-			className={`scrollbar1 center h-screen w-[840px] bg-board absolute left-0 flex flex-row`}
+			className={`scrollbar1 center h-screen tablet:w-full desktop:w-[840px] shrink-0 bg-board absolute left-0 flex flex-row`}
 		>
 			<SideNavbar
-				user={currentUser}
+				user={mockCurrentUser}
 				cardsData={cardsData}
 				onSelectFilterCategory={(category: CardCategory) => {
 					setFilterCategory(category);
@@ -77,7 +78,7 @@ function App() {
 				}}
 			></SideNavbar>
 			<Board
-				user={currentUser}
+				user={mockCurrentUser}
 				cardsData={cardsData}
 				latestCardId={latestCardId}
 				filterCategory={filterCategory}

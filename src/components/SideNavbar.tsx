@@ -12,6 +12,7 @@ import SpaceSvg from "./svgs/SpaceSvg";
 import ArtSvg from "./svgs/ArtSvg";
 import { useState } from "react";
 import ProfileIcon from "./basic/ProfileIcon";
+import ChatSvg from "./svgs/ChatSvg";
 
 interface SideNavbarProps {
 	user: User;
@@ -67,11 +68,15 @@ function SideNavbar(props: SideNavbarProps) {
 		).length;
 	}
 	return (
-		<div className="h-screen w-[230px] shrink-0 bg-side-nav-body flex flex-col">
-			<div className="h-[90px] bg-side-nav-header flex justify-center items-center shrink-0   ">
-				<p className="text-white text-2xl">
+		<div
+			className="mobile:w-[75px] h-screen
+		desktop:w-[230px] flex shrink-0 bg-side-nav-body flex-col"
+		>
+			<div className="h-[90px] bg-side-nav-header flex flex-row justify-between items-center shrink-0 p-5">
+				<p className="mobile:hidden desktop:block text-white text-2xl">
 					You<small className="font-semibold text-2xl">know</small>
 				</p>
+				<ChatSvg className="stroke-white h-8 w-8"></ChatSvg>
 			</div>
 			<div className="overflow-auto grow">
 				{(
@@ -104,9 +109,9 @@ function SideNavbar(props: SideNavbarProps) {
 					);
 				})}
 			</div>
-			<div className="h-[60px] p-3 bg-side-nav-header flex flex-row gap-4 items-center">
+			<div className="h-[60px] p-3 bg-side-nav-header flex flex-row gap-4 items-center mobile:justify-center desktop:justify-start	">
 				<ProfileIcon name={props.user.name}></ProfileIcon>
-				<p className="text-side-nav-primary font-bold text-sm">
+				<p className="mobile:hidden desktop:block text-side-nav-primary font-bold text-sm">
 					{props.user.name}
 				</p>
 			</div>

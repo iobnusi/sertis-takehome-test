@@ -45,23 +45,23 @@ function Board(props: BoardProps) {
 	};
 
 	return (
-		<div className="h-screen w-full flex flex-col">
+		<div className="h-screen w-full flex flex-col min-w-[250px]">
 			<header
-				className={`${props.className} h-[90px] shrink-0 bg-white flex flex-row px-4`}
+				className={`${props.className} h-[90px] shrink-0 bg-white flex flex-row gap-10 px-10`}
 			>
 				{navButtons.map((name) => {
 					return (
-						<li key={name} className="w-[150px] list-none">
-							<Button className="h-full w-full	 font-thin text-3xl text-card-body ">
+						<li key={name} className="desktop:w-[100px] list-none">
+							<Button className="h-full w-full font-thin mobile:text-xl tablet:text-3xl text-card-body ">
 								{name}
 							</Button>
 						</li>
 					);
 				})}
 			</header>
-			<div className="p-4 overflow-auto flex flex-col h-full gap-4">
+			<div className="mobile:p-2 desktop:p-4 overflow-auto flex flex-col h-full desktop:gap-4 mobile:gap-2 ">
 				<CardForm
-					className="p-5"
+					className="z-0 mobile:p-3 tablet:p-5"
 					author={props.user}
 					handleSubmit={handleCreate}
 					textAreaRows={1}

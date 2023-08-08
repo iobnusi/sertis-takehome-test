@@ -9,7 +9,7 @@ interface EditOptionsDropdownProps {
 }
 
 function EditOptionsDropdown(props: EditOptionsDropdownProps) {
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	const dropdown = useRef<HTMLDivElement>(null);
 
@@ -31,7 +31,7 @@ function EditOptionsDropdown(props: EditOptionsDropdownProps) {
 	});
 
 	return (
-		<div className="w-fit relative" ref={dropdown}>
+		<div className="w-fit relative " ref={dropdown}>
 			<Button
 				className="p-1 rounded-full flex flex-row gap-2 items-center"
 				onClick={() => {
@@ -43,7 +43,7 @@ function EditOptionsDropdown(props: EditOptionsDropdownProps) {
 				></EllipsisSvg>
 			</Button>
 			{open ? (
-				<div className="absolute bg-white rounded-lg top-8 w-40 h-fit max-h-60 shadow-xl flex flex-col overflow-auto">
+				<div className="absolute bg-white rounded-lg top-8 mobile:left-[-100px] tablet:left-[-50px]  w-28 h-fit max-h-60 shadow-xl flex flex-col overflow-auto">
 					<Button
 						className="h-12 shrink-0 px-4 py-1"
 						onClick={() => {

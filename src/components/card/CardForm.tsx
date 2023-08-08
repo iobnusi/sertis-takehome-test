@@ -32,7 +32,7 @@ function CardForm(props: CardFormProps) {
 		>
 			<ProfileIcon name={props.author.name}></ProfileIcon>
 			<div className="w-full flex flex-col gap-4 items-start">
-				<div className="w-full flex flex-row justify-between">
+				<div className="z-40 w-full flex flex-row justify-between">
 					<CategoryDropdown
 						category={formState.category}
 						onSelectCategory={(category: CardCategory) => {
@@ -54,7 +54,7 @@ function CardForm(props: CardFormProps) {
 				</div>
 
 				<TextArea
-					className="w-full outline-none"
+					className="w-full outline-none mobile:text-xs tablet:text-base"
 					rows={props.textAreaRows}
 					placeholder="What's on your mind?"
 					value={formState.content}
@@ -70,7 +70,7 @@ function CardForm(props: CardFormProps) {
 				<Line></Line>
 				<div className="w-full flex justify-end">
 					<Button
-						className="w-20 h-8 rounded-full bg-card-title disabled:bg-card-body"
+						className="mobile:w-16 tablet:w-20 mobile:h-6 tablet:h-8 hover:bg-card-title rounded-full bg-card-title disabled:bg-card-body"
 						disabled={props.submitButtonCondition(formState)}
 						onClick={() => {
 							document
@@ -83,7 +83,9 @@ function CardForm(props: CardFormProps) {
 							});
 						}}
 					>
-						<p className="text-white font-bold text-sm">Post</p>
+						<p className="text-white font-bold mobile:text-xs tablet:text-sm">
+							Post
+						</p>
 					</Button>
 				</div>
 			</div>

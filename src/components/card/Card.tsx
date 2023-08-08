@@ -34,7 +34,7 @@ function Card(props: CardProps) {
 				enter={props.enableEnterAnim ?? false}
 				exit={true}
 			>
-				<div className=" bg-white p-5 flex flex-col gap-8 w-full">
+				<div className=" bg-white mobile:p-3 tablet:p-5 flex flex-col gap-5 w-full">
 					<div className="flex flex-col gap-2">
 						<div className="h-6 flex flex-row justify-between items-center">
 							<p className="font-bold text-xs text-card-title">
@@ -67,7 +67,7 @@ function Card(props: CardProps) {
 							</div>
 						</div>
 
-						<p className="text-lg text-card-body ">
+						<p className="mobile:text-base tablet:text-lg text-card-body ">
 							{props.data.content}
 						</p>
 						<div className="flex flex-row h-4 gap-2">

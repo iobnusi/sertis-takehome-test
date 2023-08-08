@@ -10,7 +10,7 @@ interface StatusDropdownProps {
 }
 
 function StatusDropdown(props: StatusDropdownProps) {
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	const dropdown = useRef<HTMLDivElement>(null);
 
@@ -34,7 +34,7 @@ function StatusDropdown(props: StatusDropdownProps) {
 	return (
 		<div className="w-fit relative" ref={dropdown}>
 			<Button
-				className=" px-3 rounded-full flex flex-row gap-2 items-center  "
+				className="tablet:px-3 rounded-full flex flex-row gap-2 items-center  "
 				onClick={() => {
 					setOpen(!open);
 				}}
@@ -43,19 +43,19 @@ function StatusDropdown(props: StatusDropdownProps) {
 					status={props.status}
 					className={`h-4 w-4 fill-card-title`}
 				></StatusIcon>
-				<small className="text-card-title font-bold">
+				<small className="mobile:hidden tablet:flex text-card-title font-bold">
 					{props.status ? props.status : "Add Status"}
 				</small>
 			</Button>
 			{open ? (
-				<div className="absolute bg-white rounded-lg top-8 w-40 h-fit max-h-60 shadow-xl flex flex-col overflow-auto">
+				<div className="absolute bg-white rounded-lg top-8 mobile:left-[-100px] tablet:left-[-50px] mobile:w-28 tablet:w-40 h-fit max-h-60 shadow-xl flex flex-col overflow-auto">
 					{(
 						Object.keys(CardStatus) as (keyof typeof CardStatus)[]
 					).map((key, index) => {
 						return (
 							<li key={key} className="list-none">
 								<Button
-									className="h-12 shrink-0 px-4 py-1 "
+									className="h-12 shrink-0 px-4 py-1 w-full "
 									onClick={() => {
 										setOpen(false);
 										props.onSelectStatus(CardStatus[key]);
