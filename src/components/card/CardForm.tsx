@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import TextArea from "../basic/TextArea";
 import Line from "../basic/Line";
 import Button from "../basic/Button";
@@ -12,11 +12,14 @@ import formReducer, {
 import StatusDropdown from "../dropdown/StatusDropdown";
 import ProfileIcon from "../basic/ProfileIcon";
 import { User } from "../utils/user_util";
+import ImgUploadInput from "../basic/ImgUploadInput";
+import ImgPreview from "../basic/ImgPreview";
 
 interface CardFormProps {
 	className?: string;
 	author: User;
 	textAreaRows: number;
+	isEditMode: boolean;
 	initFormState?: FormState;
 	submitButtonCondition: (formState: FormState) => boolean;
 	handleSubmit: (formState: FormState) => void;
@@ -26,13 +29,14 @@ function CardForm(props: CardFormProps) {
 		formReducer,
 		props.initFormState ?? emptyFormState
 	);
+
 	return (
 		<div
 			className={` ${props.className} w-full h-fit bg-white flex flex-row gap-2`}
 		>
 			<ProfileIcon name={props.author.name}></ProfileIcon>
 			<div className="w-full flex flex-col gap-4 items-start">
-				<div className="z-40 w-full flex flex-row justify-between">
+				<div className={`z-40 w-full flex flex-row justify-between`}>
 					<CategoryDropdown
 						category={formState.category}
 						onSelectCategory={(category: CardCategory) => {
@@ -52,23 +56,51 @@ function CardForm(props: CardFormProps) {
 						}
 					></StatusDropdown>
 				</div>
+				<div className="flex flex-col gap-2 max-h-[360px] w-full overflow-auto">
+					<TextArea
+						className="w-full outline-none mobile:text-xs tablet:text-base shrink-0"
+						rows={props.textAreaRows}
+						placeholder="What's on your mind?"
+						value={formState.content}
+						onChange={(
+							event: React.ChangeEvent<HTMLTextAreaElement>
+						) => {
+							dispatch({
+								type: FormActionType.content_update,
+								payload: event.target.value,
+							});
+						}}
+					></TextArea>
+					{formState.imgSrc ? (
+						<ImgPreview
+							file={formState.imgSrc}
+							disableClose={props.isEditMode}
+							onRemove={() =>
+								dispatch({
+									type: FormActionType.imgSrc_update,
+									payload: "",
+								})
+							}
+						></ImgPreview>
+					) : null}
+				</div>
 
-				<TextArea
-					className="w-full outline-none mobile:text-xs tablet:text-base"
-					rows={props.textAreaRows}
-					placeholder="What's on your mind?"
-					value={formState.content}
-					onChange={(
-						event: React.ChangeEvent<HTMLTextAreaElement>
-					) => {
-						dispatch({
-							type: FormActionType.content_update,
-							payload: event.target.value,
-						});
-					}}
-				></TextArea>
 				<Line></Line>
-				<div className="w-full flex justify-end">
+				<div
+					className={`w-full flex ${
+						props.isEditMode ? "justify-end" : "justify-between"
+					}`}
+				>
+					{!props.isEditMode ? (
+						<ImgUploadInput
+							onUpload={(file) => {
+								dispatch({
+									type: FormActionType.imgSrc_update,
+									payload: URL.createObjectURL(file),
+								});
+							}}
+						></ImgUploadInput>
+					) : null}
 					<Button
 						className="mobile:w-16 tablet:w-20 mobile:h-6 tablet:h-8 hover:bg-card-title rounded-full bg-card-title disabled:bg-card-body"
 						disabled={props.submitButtonCondition(formState)}

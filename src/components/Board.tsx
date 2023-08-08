@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "./basic/Button";
 import CardColumns from "./CardColumns";
 import { CardCategory, CardData } from "./card/card_util";
@@ -6,7 +6,6 @@ import CardForm from "./card/CardForm";
 import { FormState, emptyFormState } from "./card/form_reducer";
 import { User } from "./utils/user_util";
 import CardEditModal from "./modal/CardEditModal";
-import CardDeleteModal from "./modal/CardDeleteModal";
 
 interface BoardProps {
 	cardsData: CardData[];
@@ -23,7 +22,6 @@ function Board(props: BoardProps) {
 	const navButtons = ["Activity", "Users", "Groups"];
 	const [editFormState, setEditFormState] = useState(emptyFormState);
 	const [isEditModalOpen, setEditModalOpen] = useState(false);
-
 	const handleCreate = (formState: FormState) => {
 		props.createCard(formState);
 	};
@@ -40,6 +38,7 @@ function Board(props: BoardProps) {
 			content: cardFormState.content,
 			name: cardFormState.name,
 			status: cardFormState.status,
+			imgSrc: cardFormState.imgSrc,
 		});
 		setEditModalOpen(true);
 	};
@@ -63,6 +62,7 @@ function Board(props: BoardProps) {
 				<CardForm
 					className="z-0 mobile:p-3 tablet:p-5"
 					author={props.user}
+					isEditMode={false}
 					handleSubmit={handleCreate}
 					textAreaRows={1}
 					submitButtonCondition={(formState) => {

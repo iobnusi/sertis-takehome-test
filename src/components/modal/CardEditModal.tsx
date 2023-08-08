@@ -20,8 +20,8 @@ function CardEditModal(props: CardEditModalProps) {
 			isOpen={props.isOpen}
 			handleClose={props.handleClose}
 		>
-			<div className="h-10 flex flex-row items-center justify-between ">
-				<p className=" text-xl font-bold text-card-title ">
+			<div className="h-10 flex flex-row items-center justify-between w-full	 ">
+				<p className=" text-xl font-bold text-card-title  ">
 					Edit your post
 				</p>
 				<Button
@@ -35,6 +35,7 @@ function CardEditModal(props: CardEditModalProps) {
 			<CardForm
 				author={props.author}
 				handleSubmit={props.handleUpdate}
+				isEditMode={true}
 				textAreaRows={1}
 				initFormState={props.formState}
 				submitButtonCondition={(formState) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeartSvg from "../svgs/HeartSvg";
 import Button from "../basic/Button";
 import {
@@ -10,7 +10,6 @@ import StatusIcon from "../basic/StatusIcon";
 import EditOptionsDropdown from "../dropdown/EditOptionsDropdown";
 import { EditAction } from "../dropdown/edit_options_util";
 import ProfileIcon from "../basic/ProfileIcon";
-import { CSSTransition } from "react-transition-group";
 import "./Card.css";
 import CardDeleteModal from "../modal/CardDeleteModal";
 import CardCSSTransition from "./CardCSSTransition";
@@ -34,8 +33,8 @@ function Card(props: CardProps) {
 				enter={props.enableEnterAnim ?? false}
 				exit={true}
 			>
-				<div className=" bg-white mobile:p-3 tablet:p-5 flex flex-col gap-5 w-full">
-					<div className="flex flex-col gap-2 w-full">
+				<div className=" bg-white mobile:p-3 tablet:p-5 flex flex-col gap-5 h-full w-full">
+					<div className="flex flex-col h-full w-full gap-2">
 						<div className="h-6 flex flex-row justify-between items-center">
 							<p className="font-bold text-xs text-card-title">
 								{props.data.category
@@ -103,7 +102,17 @@ function Card(props: CardProps) {
 								</small>
 							</div>
 						</div>
+						{/* Images */}
 					</div>
+					{props.data.imgSrc ? (
+						<div className="w-full h-[90px]">
+							<img
+								src={props.data.imgSrc}
+								className="object-contain h-full"
+								alt=""
+							></img>
+						</div>
+					) : null}
 					<div className="h-10 flex flex-row items-center p-2 gap-2">
 						{/* Author Info */}
 						<ProfileIcon

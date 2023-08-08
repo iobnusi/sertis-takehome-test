@@ -3,8 +3,6 @@ import { CardCategory, CardData } from "./card/card_util";
 import { User } from "./utils/user_util";
 import { FormState } from "./card/form_reducer";
 import "../App.css";
-import { animated, useTransition } from "react-spring";
-import { useEffect } from "react";
 interface CardColumnsProps {
 	cardsData: CardData[];
 	latestCardId: string;
@@ -15,7 +13,6 @@ interface CardColumnsProps {
 }
 
 function CardColumns(props: CardColumnsProps) {
-	useEffect(() => console.log(props.latestCardId), [props.latestCardId]);
 	return (
 		<>
 			<div className="h-full w-full desktop:flex mobile:hidden flex-row gap-4">
