@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import autosize from "autosize";
 
 interface TextAreaProps {
@@ -17,6 +17,7 @@ function TextArea(props: TextAreaProps) {
 	}, []);
 	return (
 		<textarea
+			id="textarea"
 			className={props.className}
 			placeholder={props.placeholder}
 			rows={props.rows ?? 1}

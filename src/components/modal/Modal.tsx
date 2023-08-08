@@ -33,7 +33,7 @@ function Modal(props: ModalProps) {
 					></div>
 				)}
 				<div
-					className={`${props.className} top-1/2 left-1/2 min-h-[200px] w-[570px] bg-white translate-x-[-50%] translate-y-[-50%] fixed`}
+					className={`${props.className} top-1/2 left-1/2 min-h-[150px] w-[570px] bg-white translate-x-[-50%] translate-y-[-50%] fixed`}
 				>
 					{props.children}
 				</div>

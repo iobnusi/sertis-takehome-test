@@ -3,10 +3,12 @@ import CardForm from "../card/CardForm";
 import { FormState } from "../card/form_reducer";
 import CloseSvg from "../svgs/CloseSvg";
 import Button from "../basic/Button";
+import { User } from "../utils/user_util";
 
 interface CardEditModalProps {
 	className?: string;
 	isOpen: boolean;
+	author: User;
 	formState: FormState;
 	handleUpdate: (formState: FormState) => void;
 	handleClose: () => void;
@@ -14,7 +16,7 @@ interface CardEditModalProps {
 function CardEditModal(props: CardEditModalProps) {
 	return (
 		<Modal
-			className="flex flex-col px-5 pb-5 pt-3 gap-6"
+			className="flex flex-col px-5 pb-5 pt-3 gap-6 rounded"
 			isOpen={props.isOpen}
 			handleClose={props.handleClose}
 		>
@@ -31,6 +33,7 @@ function CardEditModal(props: CardEditModalProps) {
 			</div>
 
 			<CardForm
+				author={props.author}
 				handleSubmit={props.handleUpdate}
 				textAreaRows={1}
 				initFormState={props.formState}

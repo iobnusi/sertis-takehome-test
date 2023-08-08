@@ -1,10 +1,6 @@
-import React, { ReactNode } from "react";
+import { SvgProps } from "./svg_util";
 
-interface ButtonProps {
-	children?: ReactNode;
-	className?: string;
-}
-function CloseSvg(props: ButtonProps) {
+function EllipsisSvg(props: SvgProps) {
 	return (
 		<svg
 			className={props.className}
@@ -17,10 +13,10 @@ function CloseSvg(props: ButtonProps) {
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"
-				d="M6 18L18 6M6 6l12 12"
+				d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
 			/>
 		</svg>
 	);
 }
 
-export default CloseSvg;
+export default EllipsisSvg;

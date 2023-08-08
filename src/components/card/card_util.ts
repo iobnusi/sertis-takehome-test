@@ -23,7 +23,10 @@ export enum CardStatus {
 export interface CardProps {
 	data: CardData;
 	isEditable: boolean;
+	runAnimOnLoad: boolean;
+	enableEnterAnim?: boolean;
 	editCallback: (cardFormState: FormState) => void;
+	deleteCallback: (cardId: string) => void;
 }
 
 export interface CardData {
