@@ -3,7 +3,6 @@ import { CardCategory, CardData } from "./card/card_util";
 import { User } from "./utils/user_util";
 import { FormState } from "./card/form_reducer";
 import "../App.css";
-import { animated, useTransition } from "react-spring";
 import { useEffect } from "react";
 interface CardColumnsProps {
 	cardsData: CardData[];

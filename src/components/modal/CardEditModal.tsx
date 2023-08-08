@@ -16,19 +16,14 @@ interface CardEditModalProps {
 	handleClose: () => void;
 }
 function CardEditModal(props: CardEditModalProps) {
-	const [previewImage, setPreviewImage] = useState(
-		props.formState.imgSrc ?? ""
-	);
-	console.log(previewImage);
-
 	return (
 		<Modal
 			className="flex flex-col px-5 pb-5 pt-3 gap-6 rounded"
 			isOpen={props.isOpen}
 			handleClose={props.handleClose}
 		>
-			<div className="h-10 flex flex-row items-center justify-between ">
-				<p className=" text-xl font-bold text-card-title ">
+			<div className="h-10 flex flex-row items-center justify-between w-full	 ">
+				<p className=" text-xl font-bold text-card-title  ">
 					Edit your post
 				</p>
 				<Button
@@ -42,7 +37,9 @@ function CardEditModal(props: CardEditModalProps) {
 			<CardForm
 				author={props.author}
 				handleSubmit={props.handleUpdate}
-				previewFilePath={previewImage}
+				previewFilePath={props.formState.imgSrc ?? ""}
+				disableUploadImage={true}
+				disableRemoveImage={true}
 				textAreaRows={1}
 				initFormState={props.formState}
 				submitButtonCondition={(formState) => {

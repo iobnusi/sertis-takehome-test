@@ -20,6 +20,8 @@ interface CardFormProps {
 	author: User;
 	textAreaRows: number;
 	previewFilePath: string;
+	disableUploadImage: boolean;
+	disableRemoveImage: boolean;
 	initFormState?: FormState;
 	submitButtonCondition: (formState: FormState) => boolean;
 	handleSubmit: (formState: FormState) => void;
@@ -31,7 +33,6 @@ function CardForm(props: CardFormProps) {
 	);
 	console.log(formState);
 
-	// const [file, setFile] = useState(props.initFormState?.imgSrc);
 	useEffect(() => {
 		console.log(formState);
 	}, [formState]);
@@ -41,7 +42,7 @@ function CardForm(props: CardFormProps) {
 		>
 			<ProfileIcon name={props.author.name}></ProfileIcon>
 			<div className="w-full flex flex-col gap-4 items-start">
-				<div className="z-40 w-full flex flex-row justify-between">
+				<div className={`z-40 w-full flex flex-row justify-between`}>
 					<CategoryDropdown
 						category={formState.category}
 						onSelectCategory={(category: CardCategory) => {
@@ -61,7 +62,7 @@ function CardForm(props: CardFormProps) {
 						}
 					></StatusDropdown>
 				</div>
-				<div className="flex flex-col max-h-[360px] w-full overflow-auto">
+				<div className="flex flex-col gap-2 max-h-[360px] w-full overflow-auto">
 					<TextArea
 						className="w-full outline-none mobile:text-xs tablet:text-base shrink-0"
 						rows={props.textAreaRows}
@@ -79,24 +80,35 @@ function CardForm(props: CardFormProps) {
 					{formState.imgSrc ? (
 						<ImgPreview
 							file={formState.imgSrc}
-							onRemove={() => {}}
+							disableClose={props.disableRemoveImage}
+							onRemove={() =>
+								dispatch({
+									type: FormActionType.imgSrc_update,
+									payload: "",
+								})
+							}
 						></ImgPreview>
 					) : null}
 				</div>
 
 				<Line></Line>
-				<div className="w-full flex justify-between">
-					<ImgUploadInput
-						onUpload={(file) => {
-							// setFile(URL.createObjectURL(file));
-							// props.handleUpload(URL.createObjectURL(file));/
-							dispatch({
-								type: FormActionType.imgSrc_update,
-								payload: URL.createObjectURL(file),
-							});
-							console.log(file);
-						}}
-					></ImgUploadInput>
+				<div
+					className={`w-full flex ${
+						props.disableUploadImage
+							? "justify-end"
+							: "justify-between"
+					}`}
+				>
+					{!props.disableUploadImage ? (
+						<ImgUploadInput
+							onUpload={(file) => {
+								dispatch({
+									type: FormActionType.imgSrc_update,
+									payload: URL.createObjectURL(file),
+								});
+							}}
+						></ImgUploadInput>
+					) : null}
 					<Button
 						className="mobile:w-16 tablet:w-20 mobile:h-6 tablet:h-8 hover:bg-card-title rounded-full bg-card-title disabled:bg-card-body"
 						disabled={props.submitButtonCondition(formState)}
@@ -104,7 +116,6 @@ function CardForm(props: CardFormProps) {
 							document
 								.getElementById("textarea")
 								?.setAttribute("style", "");
-							// setFile("");
 							props.handleSubmit(formState);
 							dispatch({
 								type: FormActionType.reset,
