@@ -66,8 +66,7 @@ function Board(props: BoardProps) {
 					className="z-0 mobile:p-3 tablet:p-5"
 					author={props.user}
 					previewFilePath={previewImage}
-					disableUploadImage={false}
-					disableRemoveImage={false}
+					isEditMode={false}
 					handleSubmit={handleCreate}
 					textAreaRows={1}
 					submitButtonCondition={(formState) => {

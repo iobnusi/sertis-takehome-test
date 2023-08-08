@@ -38,8 +38,7 @@ function CardEditModal(props: CardEditModalProps) {
 				author={props.author}
 				handleSubmit={props.handleUpdate}
 				previewFilePath={props.formState.imgSrc ?? ""}
-				disableUploadImage={true}
-				disableRemoveImage={true}
+				isEditMode={true}
 				textAreaRows={1}
 				initFormState={props.formState}
 				submitButtonCondition={(formState) => {

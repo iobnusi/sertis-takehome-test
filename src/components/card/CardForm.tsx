@@ -20,8 +20,7 @@ interface CardFormProps {
 	author: User;
 	textAreaRows: number;
 	previewFilePath: string;
-	disableUploadImage: boolean;
-	disableRemoveImage: boolean;
+	isEditMode: boolean;
 	initFormState?: FormState;
 	submitButtonCondition: (formState: FormState) => boolean;
 	handleSubmit: (formState: FormState) => void;
@@ -80,7 +79,7 @@ function CardForm(props: CardFormProps) {
 					{formState.imgSrc ? (
 						<ImgPreview
 							file={formState.imgSrc}
-							disableClose={props.disableRemoveImage}
+							disableClose={props.isEditMode}
 							onRemove={() =>
 								dispatch({
 									type: FormActionType.imgSrc_update,
@@ -94,12 +93,10 @@ function CardForm(props: CardFormProps) {
 				<Line></Line>
 				<div
 					className={`w-full flex ${
-						props.disableUploadImage
-							? "justify-end"
-							: "justify-between"
+						props.isEditMode ? "justify-end" : "justify-between"
 					}`}
 				>
-					{!props.disableUploadImage ? (
+					{!props.isEditMode ? (
 						<ImgUploadInput
 							onUpload={(file) => {
 								dispatch({
